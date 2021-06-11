@@ -1,4 +1,4 @@
-package com.org.carvalho.webstore;
+package com.org.carvalho.webstore.api;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;

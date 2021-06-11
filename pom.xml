@@ -72,6 +72,19 @@
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-jdbc-postgresql</artifactId>
     </dependency>
+    <!-- https://mvnrepository.com/artifact/io.swagger/swagger-annotations -->
+	  <dependency>
+		  <groupId>io.swagger</groupId>
+		  <artifactId>swagger-annotations</artifactId>
+		  <version>1.6.2</version>
+	  </dependency>
+    <!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+      <version>1.18.20</version>
+      <scope>provided</scope>
+    </dependency>
   </dependencies>
   <build>
     <plugins>
@@ -103,6 +116,7 @@
         <configuration>
           <systemPropertyVariables>
             <java.util.logging.manager>org.jboss.logmanager.LogManager</java.util.logging.manager>
+
             <maven.home>${maven.home}</maven.home>
           </systemPropertyVariables>
         </configuration>
@@ -132,6 +146,7 @@
                   <systemPropertyVariables>
                     <native.image.path>${project.build.directory}/${project.build.finalName}-runner</native.image.path>
                     <java.util.logging.manager>org.jboss.logmanager.LogManager</java.util.logging.manager>
+
                     <maven.home>${maven.home}</maven.home>
                   </systemPropertyVariables>
                 </configuration>
