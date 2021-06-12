@@ -1,6 +1,7 @@
 # PROJETO webstore-carvalho
-Este projeto foi desenvolvido com base de estudo para conhecer o framework QUARKUS, 
-se você quiser saber mais sobre a Quarkus, visite seu site: https://quarkus.io/ .
+Este projeto foi desenvolvido com base de estudo para aprimorar o conhecimento do framework QUARKUS, 
+se você quiser saber mais sobre o Quarkus, visite seu site: https://quarkus.io/ .
+
 
 ## Executando aplicação no modo dev
 
