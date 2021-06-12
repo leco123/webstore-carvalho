@@ -17,7 +17,7 @@ public class Webstore {
     @Produces(MediaType.TEXT_PLAIN)
     public String info() {
 
-        return "Seja bem vindo ao  \""+ConfiguracaoSistema.configNomeSistema
+        return "Seja bem vindo ao projeto \""+ConfiguracaoSistema.configNomeSistema
                 + "\" Versão: "+ConfiguracaoSistema.confgiVersao;
     }
 

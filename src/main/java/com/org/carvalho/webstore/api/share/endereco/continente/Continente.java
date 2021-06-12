@@ -1,6 +1,7 @@
 package com.org.carvalho.webstore.api.share.endereco.continente;
 
 import io.swagger.annotations.ApiModel;
+import lombok.Getter;
 
 @ApiModel(description = "Continentes")
 public enum Continente {
@@ -12,14 +13,11 @@ public enum Continente {
     CONTINENTEOCEANIA("Continente Oceania"),
     CONTINENTEANTARTIDA("Continente Antártida");
 
+    @Getter
     private String descricao;
 
     Continente(String descricao) {
         this.descricao = descricao;
-    }
-
-    public String getDescricao() {
-        return descricao;
     }
 
 }

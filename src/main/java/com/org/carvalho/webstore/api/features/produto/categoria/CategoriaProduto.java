@@ -16,9 +16,7 @@ import com.org.carvalho.webstore.api.features.produto.produto.Produto;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 /**
  * @author Alex de Carvalho
@@ -27,12 +25,14 @@ import lombok.Setter;
  * Classe Model Categoria do Produto que representa entidade "categoriaproduto"
  */
 
-@ApiModel(description = "Categoria do Produto")
+@ApiModel(value = "Categoria", description = "Categoria do Produto")
 @NoArgsConstructor
+@AllArgsConstructor
 @Getter @Setter
 @Table(schema = "principal")
 @SequenceGenerator(schema = "principal", name = "seq_categoria_produto", sequenceName = "seq_categoria_produto_api", allocationSize = 1)
 @Entity
+@Builder
 public class CategoriaProduto {
 
     @ApiModelProperty(name = "Identificação da Categoria")

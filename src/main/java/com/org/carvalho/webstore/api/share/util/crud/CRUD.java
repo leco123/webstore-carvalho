@@ -1,11 +1,12 @@
 package com.org.carvalho.webstore.api.share.util.crud;
 
+import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 
 import io.swagger.annotations.ApiModel;
 
-@ApiModel(description = "CRUD CREAT, REMOVE, UPDATE, DELETE")
+@ApplicationScoped
 public abstract class CRUD <Entidade> {
 	
 	/**
@@ -33,7 +34,7 @@ public abstract class CRUD <Entidade> {
      * @return Object DAO<Entidade>
      * @param entidade
      */
-	public CRUD<Entidade> INSERT(Entidade entidade) {
+	public CRUD<Entidade> INSERT(Entidade entidade)  throws Exception  {
 		em.persist(entidade);
 		return this;
 	}
@@ -43,7 +44,7 @@ public abstract class CRUD <Entidade> {
      * @param entidade
      * @return
      */
-	public Entidade UPDATE(Entidade entidade) {
+	public Entidade UPDATE(Entidade entidade)  throws Exception {
 		entidade = em.merge(entidade);
 		return entidade;
 	}
@@ -62,8 +63,6 @@ public abstract class CRUD <Entidade> {
         em.remove(entidade);
     }
 
-	
-	
-	
+
 }
 

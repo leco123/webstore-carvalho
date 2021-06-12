@@ -1,5 +1,7 @@
 package com.org.carvalho.webstore.api.share.util.enums;
 
+import lombok.Getter;
+
 public enum Periodo {
 
     MANHA("Manhã, período entre as 08:00 até 11:59"),
@@ -7,13 +9,10 @@ public enum Periodo {
     NOITE("Noite, período entre as 18:00 até 23:59"),
     MADRUGADA("Madrugada, período entre as 00:01 até 07:59");
 
+    @Getter
     private String descricao;
 
     Periodo(String descricao) {
         this.descricao = descricao;
-    }
-
-    public String getDescricao() {
-        return descricao;
     }
 }
