@@ -52,12 +52,7 @@ public class Produto {
     private BigDecimal preco;
     
     @ApiModelProperty(name = "Descrição do Produto")
-    @ManyToMany(cascade = CascadeType.PERSIST)
-    @JoinTable(name = "rel_categoria_produto", 
-	   schema = "principal",
-	   joinColumns = {@JoinColumn(columnDefinition = "categoriaProdutoId")},
-	   inverseJoinColumns = {@JoinColumn(columnDefinition = "produtoId")}
-		)
+    @ManyToMany(mappedBy = "produto")
     private List<CategoriaProduto> categoriaProduto;
 
     @ApiModelProperty(name = "Data do cadastro")

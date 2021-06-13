@@ -59,7 +59,12 @@ public class CategoriaProduto {
     private Boolean ativo = true;
     
     @ApiModelProperty(name = "Lista de Produtos")
-    @ManyToMany(cascade = CascadeType.PERSIST, mappedBy = "categoriaProduto",fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "rel_categoria_produto", 
+			   schema = "principal",
+			   joinColumns = @JoinColumn(columnDefinition = "categoriaProdutoId"),
+			   inverseJoinColumns = @JoinColumn(columnDefinition = "produtoId")
+	)
     private List<Produto> produto;
 	
 }

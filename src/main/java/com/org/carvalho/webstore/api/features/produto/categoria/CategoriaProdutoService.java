@@ -26,7 +26,6 @@ public class CategoriaProdutoService {
 
     /**
      * Filtra todas as categorias
-     * @throws Exception Erro
      * @author Alex de Carvalho
      */
     @ApiOperation("Filtrar todas as categorias")

@@ -25,8 +25,7 @@ public class CRUD <Entidade> {
      * https://image.slidesharecdn.com/cefet-2013-04-130408163740-phpapp01/95/mapeamento-objetorelacional-com-java-persistence-api-11-638.jpg?cb=1365439124
      */
 	
-	@PersistenceContext
-	//@Inject
+	@Inject
 	EntityManager em;
 	private Class<Entidade> classe;
 	
