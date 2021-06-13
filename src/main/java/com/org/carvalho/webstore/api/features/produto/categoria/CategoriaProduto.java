@@ -3,11 +3,15 @@ package com.org.carvalho.webstore.api.features.produto.categoria;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -34,6 +38,7 @@ import lombok.*;
 @Entity
 @Builder
 public class CategoriaProduto {
+	
 
     @ApiModelProperty(name = "Identificação da Categoria")
     @Column(name = "categoriaProdutoId")
@@ -52,10 +57,9 @@ public class CategoriaProduto {
     @ApiModelProperty(name = "Categoria Ativa")
     @Column(nullable = false)
     private Boolean ativo = true;
-
+    
     @ApiModelProperty(name = "Lista de Produtos")
-    @ManyToMany(mappedBy = "categoriaProduto")
-    @Column(name = "produtoId")
+    @ManyToMany(cascade = CascadeType.PERSIST, mappedBy = "categoriaProduto",fetch = FetchType.EAGER)
     private List<Produto> produto;
-
+	
 }

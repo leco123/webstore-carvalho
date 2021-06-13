@@ -7,9 +7,11 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.SequenceGenerator;
@@ -48,11 +50,14 @@ public class Produto {
     @ApiModelProperty(name = "Preço do Produto")
     @Column(nullable = false)
     private BigDecimal preco;
-
+    
     @ApiModelProperty(name = "Descrição do Produto")
     @ManyToMany(cascade = CascadeType.PERSIST)
-    @Column(name = "categoriaId")
-    @JoinTable(name = "rel_categoria_produto", schema = "principal")
+    @JoinTable(name = "rel_categoria_produto", 
+	   schema = "principal",
+	   joinColumns = {@JoinColumn(columnDefinition = "categoriaProdutoId")},
+	   inverseJoinColumns = {@JoinColumn(columnDefinition = "produtoId")}
+		)
     private List<CategoriaProduto> categoriaProduto;
 
     @ApiModelProperty(name = "Data do cadastro")

@@ -1,24 +1,22 @@
 package com.org.carvalho.webstore.api.features.produto.categoria;
 
 import com.org.carvalho.webstore.api.share.util.crud.CRUD;
-
+import java.util.List;
 import javax.enterprise.context.RequestScoped;
-import javax.inject.Inject;
-import java.util.Collections;
-import java.util.LinkedHashSet;
-import java.util.Set;
 
 @RequestScoped
-public class CategoriaProdutoResource {
+public class CategoriaProdutoResource extends CRUD<CategoriaProduto> {
 
-    @Inject
-    CRUD<CategoriaProduto> categoriaProduto;
+	public CategoriaProdutoResource() {
+		super(CategoriaProduto.class);
+	}
 
-    private Set<CategoriaProduto> categorias = Collections.synchronizedSet(new LinkedHashSet<>());
-
-    public void addCategoriaProduto(CategoriaProduto categoria) throws Exception {
-        categoriaProduto.INSERT(categoria);
+	public void addCategoriaProduto(CategoriaProduto categoria) throws Exception {
+    	this.INSERT(categoria);
     }
 
-
+    public List<CategoriaProduto> obterCategorias()  throws Exception {
+		return obterRegistros(100, 0);
+	}
+    
 }
