@@ -14,7 +14,7 @@ import io.swagger.annotations.ApiModel;
 
 
 @Api("Classe Principal")
-@Tag(name = "Informações do Sistema", description = "Informações, como versão do sistema, quem desenvolveu, outros...")
+@Tag(name = "Informações do Sistema", description = "Informações de versão do sistema, quem desenvolveu, outros...")
 @Path("/api/v1/")
 public class Webstore {
 
