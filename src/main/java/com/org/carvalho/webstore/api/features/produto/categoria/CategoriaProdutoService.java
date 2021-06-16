@@ -11,7 +11,11 @@ import javax.transaction.Transactional;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 
-@Api("Categoria do Produto")
+import org.eclipse.microprofile.openapi.annotations.parameters.RequestBody;
+import org.eclipse.microprofile.openapi.annotations.tags.Tag;
+import org.hibernate.annotations.Parameter;
+
+@Tag(name = "Categoria do Produto", description = "Categorias dos Produtos")
 @Path("/api/v1/produto/categoria")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
@@ -56,6 +60,7 @@ public class CategoriaProdutoService {
     @ApiOperation("Salvar Categoria do produto")
     @POST
     public void adicionarCategoria() {
+
     	try {
 			CategoriaProduto categoria = new CategoriaProduto();
 			CategoriaProduto categoria2 = new CategoriaProduto();

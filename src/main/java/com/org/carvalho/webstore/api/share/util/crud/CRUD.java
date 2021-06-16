@@ -2,7 +2,6 @@ package com.org.carvalho.webstore.api.share.util.crud;
 
 import java.util.List;
 import javax.inject.Inject;
-import javax.inject.Singleton;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;

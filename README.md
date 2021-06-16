@@ -2,6 +2,8 @@
 Este projeto foi desenvolvido com base de estudo para aprimorar o conhecimento do framework QUARKUS, 
 se você quiser saber mais sobre o Quarkus, visite seu site: https://quarkus.io/ .
 
+## DOCUMENTAÇÃO DAS REQUISIÇÕES SWAGGER
+[Acesse as requisições POST, GET, PUT, DELETE](http://localhost:8080/q/swagger-ui/)
 
 ## Executando aplicação no modo dev
 
