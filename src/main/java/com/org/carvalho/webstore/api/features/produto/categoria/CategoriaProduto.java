@@ -7,6 +7,7 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -58,8 +59,8 @@ public class CategoriaProduto {
     private Boolean ativo = true;
     
     @ApiModelProperty(name = "Lista de Produtos")
-    @JsonIgnore
-    @ManyToMany
+   // @JsonIgnore
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "rel_categoria_produto", 
 	   schema = "principal",
 	   joinColumns = @JoinColumn(name = "categoriaProdutoId",

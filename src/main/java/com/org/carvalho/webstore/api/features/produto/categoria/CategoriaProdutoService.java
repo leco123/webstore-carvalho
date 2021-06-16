@@ -1,5 +1,4 @@
 package com.org.carvalho.webstore.api.features.produto.categoria;
-import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiModelProperty;
 import io.swagger.annotations.ApiOperation;
 
@@ -7,13 +6,10 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 import javax.inject.Inject;
-import javax.transaction.Transactional;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 
-import org.eclipse.microprofile.openapi.annotations.parameters.RequestBody;
 import org.eclipse.microprofile.openapi.annotations.tags.Tag;
-import org.hibernate.annotations.Parameter;
 
 @Tag(name = "Categoria do Produto", description = "Categorias dos Produtos")
 @Path("/api/v1/produto/categoria")
