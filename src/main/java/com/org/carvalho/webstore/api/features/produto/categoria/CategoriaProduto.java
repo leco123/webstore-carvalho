@@ -1,12 +1,12 @@
 package com.org.carvalho.webstore.api.features.produto.categoria;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -16,9 +16,10 @@ import javax.persistence.ManyToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.org.carvalho.webstore.api.features.produto.produto.Produto;
 
-import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.*;
 
@@ -29,16 +30,14 @@ import lombok.*;
  * Classe Model Categoria do Produto que representa entidade "categoriaproduto"
  */
 
-@ApiModel(value = "Categoria", description = "Categoria do Produto")
+@Api("Categoria de Produtos")
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter @Setter
 @Table(schema = "principal")
 @SequenceGenerator(schema = "principal", name = "seq_categoria_produto", sequenceName = "seq_categoria_produto_api", allocationSize = 1)
 @Entity
-@Builder
 public class CategoriaProduto {
-	
 
     @ApiModelProperty(name = "Identificação da Categoria")
     @Column(name = "categoriaProdutoId")
@@ -52,19 +51,24 @@ public class CategoriaProduto {
 
     @ApiModelProperty(name = "Data e Hora do Cadastro da Categoria")
     @Column(nullable = false)
-    private LocalDateTime datahoracadastro = LocalDateTime.now();
+    private LocalDateTime datahoracadastro;
 
     @ApiModelProperty(name = "Categoria Ativa")
     @Column(nullable = false)
     private Boolean ativo = true;
     
     @ApiModelProperty(name = "Lista de Produtos")
-    @ManyToMany(fetch = FetchType.EAGER)
+    @JsonIgnore
+    @ManyToMany
     @JoinTable(name = "rel_categoria_produto", 
-			   schema = "principal",
-			   joinColumns = @JoinColumn(columnDefinition = "categoriaProdutoId"),
-			   inverseJoinColumns = @JoinColumn(columnDefinition = "produtoId")
-	)
-    private List<Produto> produto;
-	
+	   schema = "principal",
+	   joinColumns = @JoinColumn(name = "categoriaProdutoId",
+                                referencedColumnName= "categoriaProdutoId",
+                                table = "rel_categoria_produto"),
+	   inverseJoinColumns = @JoinColumn(name = "produtoId",
+                                        referencedColumnName = "produtoId",
+                                        table = "rel_categoria_produto")
+    )
+    private List<Produto> produto = new ArrayList<>();
+ 
 }

@@ -5,7 +5,9 @@ import com.org.carvalho.webstore.api.share.util.moeda.Moeda;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
@@ -19,12 +21,13 @@ import javax.validation.constraints.NotNull;
  * Classe Model País, representa a entidade do "pais" como Brasil, Alemanhã, Japão, US...
  */
 @ApiModel(description = "País")
-@Table(name = "Pais")
+@Table(schema = "principal", name = "Pais")
 @Entity
 @SequenceGenerator(schema = "principal", name = "seq_pais", sequenceName = "seq_pais_api", allocationSize = 1)
 @Getter
 @Setter
-@RequiredArgsConstructor
+@NoArgsConstructor
+@AllArgsConstructor
 public class Pais {
 
     @ApiModelProperty(name = "Identificação")

@@ -1,32 +1,35 @@
 package com.org.carvalho.webstore.api.features.produto.produto;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonFormat.Shape;
 import com.org.carvalho.webstore.api.features.produto.categoria.CategoriaProduto;
 
-import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@ApiModel(description = "Produto")
+@Api("Produto")
 @NoArgsConstructor
+@AllArgsConstructor
 @Getter @Setter
 @Table(schema = "principal")
 @SequenceGenerator(schema = "principal", name = "seq_produto", sequenceName = "seq_produto_api", allocationSize = 1)
@@ -52,12 +55,13 @@ public class Produto {
     private BigDecimal preco;
     
     @ApiModelProperty(name = "Descrição do Produto")
+    @JsonIgnore
     @ManyToMany(mappedBy = "produto")
-    private List<CategoriaProduto> categoriaProduto;
-
+    private List<CategoriaProduto> categoriaProduto = new ArrayList<>();
+	
     @ApiModelProperty(name = "Data do cadastro")
     @Column(name = "datacadastro")
-    private LocalDateTime datacadastro = LocalDateTime.now();
+    private LocalDateTime datacadastro;
 
     @ApiModelProperty(name = "Produto Ativo")
     @Column(nullable = false)

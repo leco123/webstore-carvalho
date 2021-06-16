@@ -15,6 +15,7 @@ import com.org.carvalho.webstore.api.share.endereco.pais.Pais;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -28,6 +29,7 @@ import lombok.Setter;
 @ApiModel(description = "Cidade do Estado")
 @Getter @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 @Table(schema = "principal")
 @SequenceGenerator(schema = "principal", name = "seq_cidade", sequenceName = "seq_cidade_api", allocationSize = 1)
 @Entity

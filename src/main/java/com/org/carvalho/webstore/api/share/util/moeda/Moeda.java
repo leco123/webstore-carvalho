@@ -1,6 +1,7 @@
 package com.org.carvalho.webstore.api.share.util.moeda;
 
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -19,6 +20,7 @@ import io.swagger.annotations.ApiModelProperty;
 @ApiModel(description = "Moeda")
 @Getter @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 @Table(schema = "principal")
 @SequenceGenerator(schema = "principal", name = "seq_moeda", sequenceName = "seq_moeda_api", allocationSize = 1)
 @Entity
