@@ -22,6 +22,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.io.Serializable;
+
 /**
  * @author Alex de Carvalho
  * @version 1.0.0-alpha
@@ -32,10 +34,9 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter @Setter
-@Table(schema = "principal")
-@SequenceGenerator(schema = "principal", name = "seq_endereco", sequenceName = "seq_endereco_api", allocationSize = 1)
+@SequenceGenerator(name = "seq_endereco", sequenceName = "seq_endereco_api", allocationSize = 1)
 @Entity
-public class Endereco {
+public class Endereco  implements Serializable {
 
     @ApiModelProperty(name = "Identificação")
     @Column(name = "enderecoId")

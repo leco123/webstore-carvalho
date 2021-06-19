@@ -1,10 +1,13 @@
 package com.org.carvalho.webstore.api.share.util.crud;
 
 import java.util.List;
+
+import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
+
 
 @Transactional
 public class CRUD <Entidade> {
@@ -22,7 +25,7 @@ public class CRUD <Entidade> {
 	private Class<Entidade> classe;
 	
 	
-	CRUD() {
+	public CRUD() {
         this(null);
     }
 	
@@ -46,10 +49,11 @@ public class CRUD <Entidade> {
 		try {
 			em.persist(entidade);
 			em.flush();
+			return this;
 		} catch (Exception e) {
 			System.out.println("Aconteceu uma exception a o tentar inserir uma entidade! "+e);
 		}
-		return this;
+		return null;
 	}
 
 	/**

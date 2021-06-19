@@ -13,6 +13,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 
 /**
  * @author Alex de Carvalho
@@ -21,14 +22,13 @@ import javax.validation.constraints.NotNull;
  * Classe Model País, representa a entidade do "pais" como Brasil, Alemanhã, Japão, US...
  */
 @ApiModel(description = "País")
-@Table(schema = "principal", name = "Pais")
 @Entity
-@SequenceGenerator(schema = "principal", name = "seq_pais", sequenceName = "seq_pais_api", allocationSize = 1)
+@SequenceGenerator( name = "seq_pais", sequenceName = "seq_pais_api", allocationSize = 1)
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Pais {
+public class Pais  implements Serializable {
 
     @ApiModelProperty(name = "Identificação")
     @Column(name = "paisId")

@@ -2,24 +2,8 @@ package com.org.carvalho.webstore.api.features.produto.categoria;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.org.carvalho.webstore.api.features.produto.produto.Produto;
-
+import javax.persistence.*;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.*;
@@ -35,12 +19,13 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter @Setter
-@Table(schema = "principal")
-@SequenceGenerator(schema = "principal", name = "seq_categoria_produto", sequenceName = "seq_categoria_produto_api", allocationSize = 1)
+@SequenceGenerator(name = "seq_categoria_produto", sequenceName = "seq_categoria_produto_api", allocationSize = 1)
 @Entity
-public class CategoriaProduto {
+public class CategoriaProduto implements Serializable {
 
-    @ApiModelProperty(name = "Identificação da Categoria")
+	private static final long serialVersionUID = -1455171994211357992L;
+
+	@ApiModelProperty(name = "Identificação da Categoria")
     @Column(name = "categoriaProdutoId")
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_categoria_produto")
@@ -57,19 +42,5 @@ public class CategoriaProduto {
     @ApiModelProperty(name = "Categoria Ativa")
     @Column(nullable = false)
     private Boolean ativo = true;
-    
-    @ApiModelProperty(name = "Lista de Produtos")
-   // @JsonIgnore
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "rel_categoria_produto", 
-	   schema = "principal",
-	   joinColumns = @JoinColumn(name = "categoriaProdutoId",
-                                referencedColumnName= "categoriaProdutoId",
-                                table = "rel_categoria_produto"),
-	   inverseJoinColumns = @JoinColumn(name = "produtoId",
-                                        referencedColumnName = "produtoId",
-                                        table = "rel_categoria_produto")
-    )
-    private List<Produto> produto = new ArrayList<>();
- 
+
 }

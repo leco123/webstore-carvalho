@@ -20,6 +20,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.io.Serializable;
+
 /**
  * @author Alex de Carvalho
  * @version 1.0.0-alpha
@@ -30,10 +32,9 @@ import lombok.Setter;
 @Getter @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(schema = "principal")
-@SequenceGenerator(schema = "principal", name = "seq_estado", sequenceName = "seq_estado_api", allocationSize = 1)
+@SequenceGenerator(name = "seq_estado", sequenceName = "seq_estado_api", allocationSize = 1)
 @Entity
-public class Estado {
+public class Estado  implements Serializable {
 
     @ApiModelProperty(name = "Identificador")
     @Id

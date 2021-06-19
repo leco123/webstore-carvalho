@@ -1,17 +1,12 @@
 package com.org.carvalho.webstore.api.features.produto.categoria;
-import io.swagger.annotations.ApiModelProperty;
-import io.swagger.annotations.ApiOperation;
-
-import java.time.LocalDateTime;
-import java.util.List;
 
 import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 
-import org.eclipse.microprofile.openapi.annotations.tags.Tag;
+import java.time.LocalDateTime;
+import java.util.List;
 
-@Tag(name = "Categoria do Produto", description = "Categorias dos Produtos")
 @Path("/api/v1/produto/categoria")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
@@ -24,10 +19,8 @@ public class CategoriaProdutoService {
      * Filtra todas as categorias
      * @author Alex de Carvalho
      */
-    @ApiOperation("Filtrar todas as categorias")
     @GET
     @Path("ALL")
-   
     public List<CategoriaProduto> listarTodosOsProduto(){
     	try {
     		return categoriaResource.obterCategorias();
@@ -38,8 +31,6 @@ public class CategoriaProdutoService {
     	return null;
     }
 
-    @ApiOperation("Filtrar categoria por código")
-    @ApiModelProperty(name = "codigo")
     @GET
     @Path("{codigo}")
     public CategoriaProduto getCategoriaId(@PathParam("codigo") long codigoCategoria) {
@@ -51,19 +42,19 @@ public class CategoriaProdutoService {
 		}
 		return null;
     }
-    
-    
-    @ApiOperation("Salvar Categoria do produto")
+
     @POST
     public void adicionarCategoria() {
 
     	try {
 			CategoriaProduto categoria = new CategoriaProduto();
 			CategoriaProduto categoria2 = new CategoriaProduto();
-
+			//Unidade unidade = new Unidade(1L,"Unidade de Teste", false, "teste@teste.com", TipoEndereco.EMPRESA, null, true);
+			
 			categoria.setNome("Nome da Categoria 1");
 			categoria.setAtivo(true);
 			categoria.setDatahoracadastro(LocalDateTime.now());
+			//categoria.setUnidade(new Unidade());
 
 			categoria2.setNome("Nome da Categoria 2 ");
 			categoria2.setAtivo(true);

@@ -11,6 +11,8 @@ import javax.persistence.*;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
+import java.io.Serializable;
+
 /**
  * @author Alex de Carvalho
  * @version 1.0.0-alpha
@@ -21,12 +23,13 @@ import io.swagger.annotations.ApiModelProperty;
 @Getter @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(schema = "principal")
-@SequenceGenerator(schema = "principal", name = "seq_moeda", sequenceName = "seq_moeda_api", allocationSize = 1)
+@SequenceGenerator(name = "seq_moeda", sequenceName = "seq_moeda_api", allocationSize = 1)
 @Entity
-public class Moeda {
+public class Moeda  implements Serializable {
 
-    @ApiModelProperty(name = "Identificação")
+	private static final long serialVersionUID = -7568634231578244690L;
+
+	@ApiModelProperty(name = "Identificação")
     @Column(name = "moedaId")
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_moeda")
@@ -39,6 +42,10 @@ public class Moeda {
     @ApiModelProperty(name = "Nome da Moeda")
     @Column(nullable = false)
     private String nome;
+    
+    @ApiModelProperty(name = "Símbolo da Moeda")
+    @Column(nullable = false, length = 5)
+    private String simbolo;
 
 
 }
