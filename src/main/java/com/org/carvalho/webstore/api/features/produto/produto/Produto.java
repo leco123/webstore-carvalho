@@ -3,14 +3,12 @@ package com.org.carvalho.webstore.api.features.produto.produto;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.List;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.SequenceGenerator;
+import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.org.carvalho.webstore.api.features.produto.categoria.CategoriaProduto;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
@@ -53,5 +51,10 @@ public class Produto  implements Serializable {
     @ApiModelProperty(name = "Produto Ativo")
     @Column(nullable = false)
     private Boolean ativo = true;
+
+    @ApiModelProperty(name = "Categoria do Produto")
+    @JsonIgnore
+    @ManyToMany(mappedBy = "produtos")
+    private List<CategoriaProduto> categoriasDosProdutos;
 
 }

@@ -59,8 +59,8 @@ public class Unidade  implements Serializable {
     private String email;
 
     @ApiModelProperty("Endereço da Unidade")
-    @JoinColumn(name = "enderecoId", nullable = false)
     @OneToOne
+    @JoinColumn(name = "enderecoId", nullable = false)
     private Endereco endereco;
 
     @ApiModelProperty("Tipo de Endereço")
@@ -69,12 +69,16 @@ public class Unidade  implements Serializable {
     private TipoEndereco tipoEndereco;
 
     @ApiModelProperty(name = "Moeda")
-    @JoinColumn(name = "moedaId")
-    @ManyToOne
+    @OneToOne
+    @JoinColumn(name = "moedaId", nullable = false)
     private Moeda moeda;
 
     @ApiModelProperty("Unidade ativa no sistema")
     @Column(nullable = false)
     private Boolean ativo = true;
 
+    @ApiModelProperty("Categoria dos produtos")
+    @JsonIgnore
+    @OneToMany(mappedBy = "unidade")
+    private List<CategoriaProduto> categoriaProdutos;
 }

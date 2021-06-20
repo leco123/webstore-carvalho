@@ -8,8 +8,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
 
-
-@Transactional
 public class CRUD <Entidade> {
 	
 	/**
@@ -76,6 +74,7 @@ public class CRUD <Entidade> {
 	protected Entidade atualizar(Entidade entidade)  {
 		try {
 			entidade = em.merge(entidade);
+			em.flush();
 			return entidade;
 		} catch (Exception e) {
 			System.out.println("Aconteceu uma exception a o tentar atualizar uma entidade! "+e);
@@ -134,6 +133,7 @@ public class CRUD <Entidade> {
 		try {
 			entidade = em.merge(entidade);
 			em.remove(entidade);
+			em.flush();
 		} catch (Exception e ){
 			System.out.println("Aconteceu uma exception a o tentar remover entidade "+e);
 		}

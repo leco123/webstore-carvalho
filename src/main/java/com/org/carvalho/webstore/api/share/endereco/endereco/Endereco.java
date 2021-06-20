@@ -1,14 +1,6 @@
 package com.org.carvalho.webstore.api.share.endereco.endereco;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import com.org.carvalho.webstore.api.share.endereco.bairro.Bairro;
 import com.org.carvalho.webstore.api.share.endereco.cidade.Cidade;
@@ -50,22 +42,22 @@ public class Endereco  implements Serializable {
 
     @ApiModelProperty(name = "País de Localização do Bairro")
     @JoinColumn(nullable = false, name = "paisId", referencedColumnName = "paisId")
-    @ManyToOne
+    @OneToOne
     private Pais pais;
 
     @ApiModelProperty(name = "Estado de Localização do Bairro")
     @JoinColumn(nullable = false, name = "estadoId", referencedColumnName = "estadoId")
-    @ManyToOne
+    @OneToOne
     private Estado estado;
 
     @ApiModelProperty(name = "Cidade de Localização do Bairro")
     @JoinColumn(nullable = false, name = "cidadeId", referencedColumnName = "cidadeId")
-    @ManyToOne
+    @OneToOne
     private Cidade cidade;
 
     @ApiModelProperty(name = "Bairro de Localização")
     @JoinColumn(nullable = false, name = "bairroId", referencedColumnName = "bairroId")
-    @ManyToOne
+    @OneToOne
     private Bairro bairro;
 
     @ApiModelProperty(name = "CEP-Código de Endereçamento Postal")

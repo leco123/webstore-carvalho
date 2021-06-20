@@ -1,6 +1,7 @@
 package com.org.carvalho.webstore.api.features.produto.categoria;
 
 import javax.inject.Inject;
+import javax.transaction.Transactional;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 
@@ -21,6 +22,7 @@ public class CategoriaProdutoService {
      */
     @GET
     @Path("ALL")
+	@Transactional
     public List<CategoriaProduto> listarTodosOsProduto(){
     	try {
     		return categoriaResource.obterCategorias();
@@ -33,6 +35,7 @@ public class CategoriaProdutoService {
 
     @GET
     @Path("{codigo}")
+	@Transactional
     public CategoriaProduto getCategoriaId(@PathParam("codigo") long codigoCategoria) {
     	try {
     		return categoriaResource.obterObjetoPorID(codigoCategoria); 
@@ -44,6 +47,7 @@ public class CategoriaProdutoService {
     }
 
     @POST
+	@Transactional
     public void adicionarCategoria() {
 
     	try {
