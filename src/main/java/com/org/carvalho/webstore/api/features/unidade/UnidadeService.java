@@ -59,8 +59,9 @@ public class UnidadeService {
 
     @POST
     public void adicionarUnidade() {
-		
+    	/*
     	try {
+    		
     		Unidade unidade = new Unidade();
     		Moeda moeda = new Moeda();
     		Pais pais = new Pais();
@@ -75,7 +76,7 @@ public class UnidadeService {
     		moeda.setId(1L);
     		
     		//pais.setId(1L);
-    		pais.setContinente(Continente.CONTINENTEAMERICANDO);
+    		pais.setContinente(Continente.AMERICANDO);
     		pais.setMoeda(moeda);
     		pais.setNome("Brasil");
     		pais.setSigla("BR");
@@ -120,6 +121,7 @@ public class UnidadeService {
 			System.out.println("Ocorreu uma exception a o "
 					+ "executar o método addUnidade(Unidade) "+e);
 		}
+		*/
     }
 
 	

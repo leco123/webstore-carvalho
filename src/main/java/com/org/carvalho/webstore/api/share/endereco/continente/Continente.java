@@ -6,12 +6,12 @@ import lombok.Getter;
 @ApiModel(description = "Continentes")
 public enum Continente {
 
-    CONTINENTEAMERICANDO("Continente Americano"),
-    CONTINENTEEUROPEU("Continente Europeu"),
-    CONTINENTEASIATICO("Continente Asiático"),
-    CONTINENTEAFRICANO("Continente Africano"),
-    CONTINENTEOCEANIA("Continente Oceania"),
-    CONTINENTEANTARTIDA("Continente Antártida");
+    AMERICANDO("Continente Americano"),
+    EUROPEU("Continente Europeu"),
+    ASIATICO("Continente Asiático"),
+    AFRICANO("Continente Africano"),
+    OCEANIA("Continente Oceania"),
+    ANTARTIDA("Continente Antártida");
 
     @Getter
     private String descricao;

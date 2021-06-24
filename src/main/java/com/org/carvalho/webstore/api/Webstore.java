@@ -39,6 +39,7 @@ public class Webstore {
 	@GET
 	@Path("/salvar-registros")
     public void salvarRegistros() {
+		/*
 	CRUD<Object> crud = new CRUD<>();
 		
 	Unidade unidade = new Unidade();
@@ -52,7 +53,7 @@ public class Webstore {
 	crud.inserirAtomico(moeda);
 	
 	Pais pais = new Pais();
-	pais.setContinente(Continente.CONTINENTEAMERICANDO);
+	pais.setContinente(Continente.AMERICANDO);
 	pais.setMoeda(moeda);
 	pais.setNome("Brasil");
 	pais.setSigla("BR");
@@ -126,6 +127,7 @@ public class Webstore {
 	quarto.setNome("Quarto");
 
 	crud.inserir(quarto);
+	*/
 
     }
 	

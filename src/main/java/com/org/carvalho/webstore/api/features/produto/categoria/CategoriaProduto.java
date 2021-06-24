@@ -2,11 +2,11 @@ package com.org.carvalho.webstore.api.features.produto.categoria;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.*;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.org.carvalho.webstore.api.features.produto.produto.Produto;
 import com.org.carvalho.webstore.api.features.unidade.Unidade;
 import io.swagger.annotations.Api;
@@ -51,11 +51,12 @@ public class CategoriaProduto implements Serializable {
     @ApiModelProperty(name = "Produtos que fazem parte da categoria")
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "relCategoriaProduto",
-               joinColumns =  @JoinColumn(name = "categoriaProdutoId"),
-               inverseJoinColumns =  @JoinColumn(name = "produtoId")
+               joinColumns =  @JoinColumn(name = "categoriaProdutoId", referencedColumnName = "categoriaProdutoId"),
+               inverseJoinColumns =  @JoinColumn(name = "produtoId", referencedColumnName = "produtoId")
     )
-    private List<Produto> produtos;
+    private List<Produto> produtos = new ArrayList<>();
 
+    @NonNull
     @ApiModelProperty(name = "Unidade/Estabelecimento")
     @ManyToOne
     @JoinColumn(name = "unidadeId", nullable = false)

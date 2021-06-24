@@ -5,6 +5,8 @@ import javax.transaction.Transactional;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 
+import com.org.carvalho.webstore.api.features.unidade.Unidade;
+
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -32,7 +34,7 @@ public class CategoriaProdutoService {
 		}
     	return null;
     }
-
+/*
     @GET
     @Path("{codigo}")
 	@Transactional
@@ -45,32 +47,45 @@ public class CategoriaProdutoService {
 		}
 		return null;
     }
-
+*/
     @POST
 	@Transactional
     public void adicionarCategoria() {
 
     	try {
+    		
 			CategoriaProduto categoria = new CategoriaProduto();
 			CategoriaProduto categoria2 = new CategoriaProduto();
-			//Unidade unidade = new Unidade(1L,"Unidade de Teste", false, "teste@teste.com", TipoEndereco.EMPRESA, null, true);
+			Unidade unidade = new Unidade();
 			
-			categoria.setNome("Nome da Categoria 1");
+			categoria.setNome("Categoria de Teste 1 (UM)");
 			categoria.setAtivo(true);
 			categoria.setDatahoracadastro(LocalDateTime.now());
-			//categoria.setUnidade(new Unidade());
 
-			categoria2.setNome("Nome da Categoria 2 ");
+			categoria2.setNome("Categoria de Teste 2 (DOIS)");
 			categoria2.setAtivo(true);
 			categoria2.setDatahoracadastro(LocalDateTime.now());
 
 			categoriaResource.addCategoriaProduto(categoria);
 			categoriaResource.addCategoriaProduto(categoria2);
+			
 
 		} catch (Exception e) {
 			System.out.println("Ocorreu uma exception a o "
 					+ "executar o método addCategoriaProduto(categoria) "+e);
 		}
     }
+
+	@DELETE
+    //@Transactional
+	@Path("delete/{codigo}")
+	public void removerCategoria(@PathParam("codigo") Long codigoCategoria) {
+    	try {
+    		categoriaResource.removerCategoria(codigoCategoria);
+		} catch (Exception e) {
+			System.out.println("Opsss, falha ao tentar remover categoria, "+codigoCategoria+" "+e);
+		}
+
+	}
 
 }

@@ -1,14 +1,18 @@
 package com.org.carvalho.webstore.api.share.util.crud;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
+import javax.inject.Singleton;
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
 
-public class CRUD <Entidade> {
+
+public class  CRUD<Entidade> implements Serializable {
 	
 	/**
      * CICLO DE VIDA JPA
@@ -17,16 +21,16 @@ public class CRUD <Entidade> {
      * Imagem representando ciclo devida JPA
      * https://image.slidesharecdn.com/cefet-2013-04-130408163740-phpapp01/95/mapeamento-objetorelacional-com-java-persistence-api-11-638.jpg?cb=1365439124
      */
-	
-	@Inject
+
+	@PersistenceContext
 	EntityManager em;
-	private Class<Entidade> classe;
-	
-	
+	Class<Entidade> classe;
+
+
 	public CRUD() {
         this(null);
     }
-	
+
 	public CRUD(Class<Entidade> classe) {
 		this.classe = classe;
     }
@@ -49,7 +53,7 @@ public class CRUD <Entidade> {
 			em.flush();
 			return this;
 		} catch (Exception e) {
-			System.out.println("Aconteceu uma exception a o tentar inserir uma entidade! "+e);
+			System.out.println("Aconteceu uma exception a o tentar inserir"+entidade+" ! "+e);
 		}
 		return null;
 	}
@@ -121,19 +125,21 @@ public class CRUD <Entidade> {
 	
 	/**
      * Remover
-     * @param entidade
-     * @return
+     * @param id Object
+     * @return void
      */
-	public void remover(Entidade entidade) {
+	public void remover(Object id) {
         // devido não saber o estado da entidade, se faz necessário reatribuir o
         // objeto (entidade) e definilo como estado manager,
         // pra isso basta setar objeto como manager e depois remover
         // só para garantir que a entidade esta manager
-
+		Entidade entidade = em.find(classe, id);
 		try {
-			entidade = em.merge(entidade);
+			if (classe == null || id == null || entidade == null) {
+				throw new UnsupportedOperationException("Não foi possível remover " +id);
+			}
 			em.remove(entidade);
-			em.flush();
+			//em.flush();
 		} catch (Exception e ){
 			System.out.println("Aconteceu uma exception a o tentar remover entidade "+e);
 		}

@@ -51,10 +51,10 @@ public class Produto  implements Serializable {
     @ApiModelProperty(name = "Produto Ativo")
     @Column(nullable = false)
     private Boolean ativo = true;
-
+    /*
     @ApiModelProperty(name = "Categoria do Produto")
     @JsonIgnore
     @ManyToMany(mappedBy = "produtos")
     private List<CategoriaProduto> categoriasDosProdutos;
-
+    */
 }
