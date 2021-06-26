@@ -30,7 +30,7 @@ public class Moeda  implements Serializable {
 	private static final long serialVersionUID = -7568634231578244690L;
 
 	@ApiModelProperty(name = "Identificação")
-    @Column(name = "moedaId")
+    @Column(name = "moedaid")
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_moeda")
     private Long id;

@@ -27,11 +27,12 @@ public class UnidadeService {
 	
 	@Inject
 	UnidadeResource unidadeResource;
-	
+
     /**
      * Filtra todas as categorias
      * @author Alex de Carvalho
      */
+    /*
     @GET
     @Path("/ALL")
 	public List<Unidade> listarTodosOsProduto(){
@@ -44,6 +45,8 @@ public class UnidadeService {
     	return null;
     }
 
+     */
+	/*
     @GET
     @Path("{codigo}")
     public Unidade getUnidadeId(@PathParam("codigo") long codigoUnidade) {
@@ -55,7 +58,7 @@ public class UnidadeService {
 		}
 		return null;
     }
-	
+	*/
 
     @POST
     public void adicionarUnidade() {

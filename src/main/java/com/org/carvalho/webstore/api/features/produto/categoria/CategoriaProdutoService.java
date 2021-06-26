@@ -4,19 +4,29 @@ import javax.inject.Inject;
 import javax.transaction.Transactional;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 import com.org.carvalho.webstore.api.features.unidade.Unidade;
+import com.org.carvalho.webstore.api.features.unidade.UnidadeResource;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.logging.Logger;
 
 @Path("/api/v1/produto/categoria")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
+@Transactional
 public class CategoriaProdutoService {
+
+	private static final Logger LOGGER = Logger.getLogger(String.valueOf(CategoriaProdutoService.class));
 
     @Inject
     CategoriaProdutoResource categoriaResource;
+
+    @Inject
+	UnidadeResource unidadeResource;
+
 
     /**
      * Filtra todas as categorias
@@ -24,68 +34,93 @@ public class CategoriaProdutoService {
      */
     @GET
     @Path("ALL")
-	@Transactional
     public List<CategoriaProduto> listarTodosOsProduto(){
     	try {
     		return categoriaResource.obterCategorias();
 		} catch (Exception e) {
-			System.out.println("Ocorreu uma exception a o "
-					+ "executar o método obterCategorias() "+e);
+			LOGGER.severe(e.getMessage());
+			throw  new WebApplicationException(500);
 		}
-    	return null;
     }
-/*
+
+
+
     @GET
     @Path("{codigo}")
-	@Transactional
-    public CategoriaProduto getCategoriaId(@PathParam("codigo") long codigoCategoria) {
-    	try {
-    		return categoriaResource.obterObjetoPorID(codigoCategoria); 
+    public Response getCategoriaId(@PathParam("codigo") long codigoCategoria) {
+		try {
+			CategoriaProduto  categoria = categoriaResource.encontrePorId(codigoCategoria);
+			return Response
+					.status(200)
+					.entity(categoria)
+					.build();
 		} catch (Exception e) {
-			System.out.println("Ocorreu uma exception a o "
-					+ "executar o método obterObjetoPorID(codigoCategoria) "+e);
+			LOGGER.severe(e.getMessage());
+			throw  new WebApplicationException(500);
 		}
-		return null;
     }
-*/
-    @POST
-	@Transactional
-    public void adicionarCategoria() {
 
+    @POST
+    public Response adicionarCategoria() {
     	try {
     		
 			CategoriaProduto categoria = new CategoriaProduto();
 			CategoriaProduto categoria2 = new CategoriaProduto();
-			Unidade unidade = new Unidade();
-			
+
+			Unidade unidade = unidadeResource.encontrePorId(1L);
+
 			categoria.setNome("Categoria de Teste 1 (UM)");
 			categoria.setAtivo(true);
 			categoria.setDatahoracadastro(LocalDateTime.now());
+			categoria.setUnidade(unidade);
 
 			categoria2.setNome("Categoria de Teste 2 (DOIS)");
 			categoria2.setAtivo(true);
 			categoria2.setDatahoracadastro(LocalDateTime.now());
-
+			categoria2.setUnidade(unidade);
 			categoriaResource.addCategoriaProduto(categoria);
 			categoriaResource.addCategoriaProduto(categoria2);
-			
 
+			return Response
+					.status(200)
+					.entity("Registro(s) inserido:"
+							+categoria.toString())
+					.build();
 		} catch (Exception e) {
-			System.out.println("Ocorreu uma exception a o "
-					+ "executar o método addCategoriaProduto(categoria) "+e);
+			LOGGER.severe(e.getMessage());
+			throw  new WebApplicationException(500);
 		}
     }
 
 	@DELETE
-    //@Transactional
-	@Path("delete/{codigo}")
-	public void removerCategoria(@PathParam("codigo") Long codigoCategoria) {
+	@Path("/{codigo}")
+	public Response removerCategoria(@PathParam("codigo") Long codigoCategoria) {
     	try {
-    		categoriaResource.removerCategoria(codigoCategoria);
+    		CategoriaProduto categoriaProduto = categoriaResource.removerCategoria(codigoCategoria);
+
+			return Response
+					.status(200)
+					.entity("Registro removido com sucesso.")
+					.build();
 		} catch (Exception e) {
-			System.out.println("Opsss, falha ao tentar remover categoria, "+codigoCategoria+" "+e);
+			LOGGER.severe(e.getMessage());
+			throw  new WebApplicationException(500);
 		}
 
+	}
+
+	@PUT
+	public Response updateCategoria(CategoriaProduto categoriaProduto) {
+		try {
+			categoriaResource.atualizarCategoria(categoriaProduto);
+			return Response
+					.status(200)
+					.entity("Registro atualizado com sucesso. \n "+ categoriaProduto)
+					.build();
+		} catch (Exception e) {
+			LOGGER.severe(e.getMessage());
+			throw  new WebApplicationException(500);
+		}
 	}
 
 }

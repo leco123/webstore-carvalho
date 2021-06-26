@@ -2,6 +2,7 @@ package com.org.carvalho.webstore.api.share.endereco.endereco;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.org.carvalho.webstore.api.share.endereco.bairro.Bairro;
 import com.org.carvalho.webstore.api.share.endereco.cidade.Cidade;
 import com.org.carvalho.webstore.api.share.endereco.estado.Estado;

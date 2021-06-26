@@ -10,6 +10,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.org.carvalho.webstore.api.share.endereco.cidade.Cidade;
 import com.org.carvalho.webstore.api.share.endereco.estado.Estado;
 import com.org.carvalho.webstore.api.share.endereco.pais.Pais;
@@ -48,16 +49,19 @@ public class Bairro  implements Serializable {
     private String nome;
 
     @ApiModelProperty(name = "País de Localização do Bairro")
+    @JsonIgnore
     @JoinColumn(nullable = false, name = "paisId", referencedColumnName = "paisId")
     @ManyToOne
     private Pais pais;
 
     @ApiModelProperty(name = "Estado de Localização do Bairro")
+    @JsonIgnore
     @JoinColumn(nullable = false, name = "estadoId", referencedColumnName = "estadoId")
     @ManyToOne
     private Estado estado;
 
     @ApiModelProperty(name = "Cidade de Localização do Bairro")
+    @JsonIgnore
     @JoinColumn(nullable = false, name = "cidadeId", referencedColumnName = "cidadeId")
     @ManyToOne
     private Cidade cidade;
