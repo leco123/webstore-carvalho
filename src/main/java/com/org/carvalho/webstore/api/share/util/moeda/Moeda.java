@@ -23,11 +23,10 @@ import java.io.Serializable;
 @Getter @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Table(name = "moeda", indexes = @Index(name = "moeda_nome", columnList = "nome"))
 @SequenceGenerator(name = "seq_moeda", sequenceName = "seq_moeda_api", allocationSize = 1)
 @Entity
 public class Moeda  implements Serializable {
-
-	private static final long serialVersionUID = -7568634231578244690L;
 
 	@ApiModelProperty(name = "Identificação")
     @Column(name = "moedaid")

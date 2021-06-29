@@ -23,6 +23,7 @@ import java.io.Serializable;
  */
 @ApiModel(description = "País")
 @Entity
+@Table(name = "pais", indexes = @Index(name = "pais_nome", columnList = "nome"))
 @SequenceGenerator( name = "seq_pais", sequenceName = "seq_pais_api", allocationSize = 1)
 @Getter
 @Setter
@@ -37,25 +38,25 @@ public class Pais  implements Serializable {
     private Long id;
 
     @ApiModelProperty(name = "Nome do País")
-    @Column(nullable = false)
+    @Column(nullable = false, length = 80)
     private String nome;
 
     @ApiModelProperty(name = "Código do País")
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false, length = 4)
     private Integer codigoPais;
 
     @ApiModelProperty(name = "Sigla do País")
-    @Column(nullable = false, unique = true, length = 4)
+    @Column(nullable = false, length = 5)
     private String Sigla;
 
     @ApiModelProperty(name = "Continente do País")
     @Enumerated(EnumType.STRING)
+    @Column(name = "continente", nullable = false)
     private Continente continente;
 
-    @NotNull(message = "Moeda não pode ser null")
     @ApiModelProperty(name = "Moeda oficial do País")
-    @JoinColumn(nullable = false, name = "moedaId")
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne
+    @JoinColumn(nullable = false, name = "moedaId", foreignKey = @ForeignKey(name = "fk_pais_moeda"))
     private Moeda moeda;
 
 }

@@ -24,11 +24,14 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter @Setter
-@SequenceGenerator(name = "seq_categoria_produto", sequenceName = "seq_categoria_produto_api", allocationSize = 1)
+@SequenceGenerator(name = "seq_categoria_produto", sequenceName = "seq_categoria_produto_api", allocationSize = 1, initialValue = 1)
+@Table(name = "CategoriaProduto",
+        indexes = {
+                @Index(name = "categoriaproduto_nome", columnList = "nome")
+        }
+)
 @Entity
 public class CategoriaProduto implements Serializable {
-
-	private static final long serialVersionUID = -1455171994211357992L;
 
 	@ApiModelProperty(name = "Identificação da Categoria")
     @Column(name = "categoriaProdutoId")
@@ -37,7 +40,7 @@ public class CategoriaProduto implements Serializable {
     private Long id;
 
     @ApiModelProperty(name = "Nome da Categoria do Produto")
-    @Column(nullable = false)
+    @Column(nullable = false, length = 80)
     private String nome;
 
     @ApiModelProperty(name = "Data e Hora do Cadastro da Categoria")
@@ -51,15 +54,19 @@ public class CategoriaProduto implements Serializable {
     @ApiModelProperty(name = "Produtos que fazem parte da categoria")
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "relCategoriaProduto",
-               joinColumns =  @JoinColumn(name = "categoriaProdutoId", referencedColumnName = "categoriaProdutoId"),
-               inverseJoinColumns =  @JoinColumn(name = "produtoId", referencedColumnName = "produtoId")
+               indexes = {
+                        @Index(name = "categoriaProdutoId", columnList ="categoriaProdutoId" ),
+                        @Index(name = "produtoId", columnList = "produtoId")
+               },
+               joinColumns =  @JoinColumn(name = "categoriaProdutoId", foreignKey = @ForeignKey(name = "fk_relCategoriaProduto_produto")),
+               inverseJoinColumns =  @JoinColumn(name = "produtoId", foreignKey = @ForeignKey(name = "fk_relCategoriaProduto_categoria"))
     )
     private List<Produto> produtos = new ArrayList<>();
 
     @NonNull
     @ApiModelProperty(name = "Unidade/Estabelecimento")
     @ManyToOne
-    @JoinColumn(name = "unidadeId", nullable = false)
+    @JoinColumn(name = "unidadeId", nullable = false, foreignKey = @ForeignKey(name = "fk_categoriaproduto_unidade"))
     private Unidade unidade;
 
 

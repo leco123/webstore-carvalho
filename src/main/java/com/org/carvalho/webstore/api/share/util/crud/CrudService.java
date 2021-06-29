@@ -6,17 +6,15 @@ import java.util.List;
 /*
  * A base para um DAO genérico são suas operações CRUD. A seguinte interface define os métodos para um DAO genérico:
  */
-public interface CrudService<T extends Serializable, PK> {
+public interface CrudService<T, PK extends Serializable> {
 
-    T salvarRegistro(T entidade);
+    T salvar(T entidade);
 
     T update(T entidade);
 
     T deletePorId(PK id);
 
     T encontrePorId(PK id);
-
-    List<T> encontrePorNome(String name);
 
     List<T> encontreTodos();
 

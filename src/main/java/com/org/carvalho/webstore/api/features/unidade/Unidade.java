@@ -33,11 +33,10 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Setter @Getter
+@Table(name = "unidade", indexes = {@Index(name = "unid_nome", columnList = "nome")})
 @SequenceGenerator(name = "seq_unidade", sequenceName = "seq_unidade_api", allocationSize = 1)
 @Entity
 public class Unidade  implements Serializable {
-
-	private static final long serialVersionUID = -1760548901151566430L;
 
 	@ApiModelProperty("Indentificador")
     @Id
@@ -51,16 +50,16 @@ public class Unidade  implements Serializable {
 
     @ApiModelProperty("Unidade principal")
     @Column(nullable = false)
-    private Boolean principal;
+    private Boolean principal = false;
 
     @ApiModelProperty("E-mail principal da Unidade")
     @Email
-    @Column(nullable = false)
+    @Column(nullable = false, length = 80)
     private String email;
 
     @ApiModelProperty("Endereço da Unidade")
     @OneToOne
-    @JoinColumn(name = "enderecoId", nullable = false)
+    @JoinColumn(name = "enderecoId", nullable = false, foreignKey = @ForeignKey(name = "fk_unidade_endereco"))
     private Endereco endereco;
 
     @ApiModelProperty("Tipo de Endereço")
@@ -70,7 +69,7 @@ public class Unidade  implements Serializable {
 
     @ApiModelProperty(name = "Moeda")
     @OneToOne
-    @JoinColumn(name = "moedaId", nullable = false)
+    @JoinColumn(name = "moedaId", nullable = false, foreignKey = @ForeignKey(name = "fk_unidade_moeda"))
     private Moeda moeda;
 
     @ApiModelProperty("Unidade ativa no sistema")

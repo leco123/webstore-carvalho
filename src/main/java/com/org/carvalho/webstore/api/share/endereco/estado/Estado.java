@@ -1,15 +1,6 @@
 package com.org.carvalho.webstore.api.share.endereco.estado;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.org.carvalho.webstore.api.share.endereco.pais.Pais;
@@ -33,6 +24,7 @@ import java.io.Serializable;
 @Getter @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Table(name = "estado", indexes = @Index(name = "estado_nome", columnList = "nome"))
 @SequenceGenerator(name = "seq_estado", sequenceName = "seq_estado_api", allocationSize = 1)
 @Entity
 public class Estado  implements Serializable {
@@ -54,7 +46,7 @@ public class Estado  implements Serializable {
     @ApiModelProperty(name = "País onde fica localizado o estado")
     @JsonIgnore
     @Getter @Setter
-    @JoinColumn(name = "paisId", nullable = false, referencedColumnName = "paisId")
+    @JoinColumn(name = "paisId", nullable = false, foreignKey = @ForeignKey(name = "fk_estado_pais"))
     @ManyToOne(fetch = FetchType.LAZY)
     private Pais pais;
 

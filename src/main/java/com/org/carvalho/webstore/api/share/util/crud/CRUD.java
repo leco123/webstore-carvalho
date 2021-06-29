@@ -6,26 +6,33 @@ import javax.persistence.PersistenceException;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.List;
 
-//@Transactional(Transactional.TxType.MANDATORY)
-public abstract  class  CRUD<T extends Serializable, PK>
+public abstract class  CRUD<T , PK extends Serializable>
 		implements CrudService<T, PK>  {
 
 	@Inject
 	protected EntityManager em;
 	private Class<T> persistedClass;
-
 	private CRUD() {}
 
-	protected CRUD(Class<T> persistedClass) {
+	public CRUD(Class<T> persistedClass) {
 		this();
 		this.persistedClass = persistedClass;
+		System.out.println("LOG DE INFORMATIVO: " +
+				"TIPO: CARREGANDO CONSTRUCTOR \n" +
+				"OPCIONAL: "+persistedClass.toString()+" \n"+
+				"DATA HORA: "+ LocalDateTime.now() +" \n\n ");
 	}
 
 	@Override
-	public T salvarRegistro(T entidade) {
+	public T salvar(T entidade) {
 		try {
+			System.out.println("LOG DE INFORMATIVO: " +
+					"TIPO: SALVANDO REGISTRO \n" +
+					"OPCIONAL: "+entidade.toString()+" \n"+
+					"DATA HORA: "+ LocalDateTime.now() +" \n\n ");
 			em.persist(entidade);
 		} catch (PersistenceException e) {
 			em.getTransaction().rollback();
@@ -39,6 +46,10 @@ public abstract  class  CRUD<T extends Serializable, PK>
 	public T update(T entidade) {
 		try {
 			entidade = em.merge(entidade);
+			System.out.println("LOG DE INFORMATIVO " +
+					"TIPO: UPDATE ENTIDADE \n" +
+					"OPCIONAL: "+entidade.toString()+" \n"+
+					"DATA HORA: "+ LocalDateTime.now() +" \n\n ");
 			return entidade;
 		} catch (Exception e) {
 			em.getTransaction().rollback();
@@ -50,11 +61,14 @@ public abstract  class  CRUD<T extends Serializable, PK>
 
 	@Override
 	public T deletePorId(PK id) {
-
 		try {
 			T entity = encontrePorId(id);
 			T mergedEntity = em.merge(entity);
 			em.remove(mergedEntity);
+			System.out.println("LOG DE INFORMATIVO " +
+					"TIPO: REMOVENDO ENTIDADE \n" +
+					"OPCIONAL: "+entity.toString()+" \n"+
+					"DATA HORA: "+ LocalDateTime.now() +" \n\n ");
 			return entity;
 		} catch (Exception e) {
 			throw new PersistenceException("Não foi possível remover o registro " +id
@@ -66,6 +80,10 @@ public abstract  class  CRUD<T extends Serializable, PK>
 	public T encontrePorId(PK id) {
 		try {
 			T entidade = em.find(persistedClass, id);
+			System.out.println("LOG DE INFORMATIVO: " +
+					"TIPO: PESQUISANDO ENTIDADE POR ID \n" +
+					"OPCIONAL: "+id.toString()+" \n"+
+					"DATA HORA: "+ LocalDateTime.now() +" \n\n ");
 			return entidade;
 		} catch (Exception e){
 			throw new PersistenceException("Não foi possível encontrar entidade)"
@@ -74,15 +92,8 @@ public abstract  class  CRUD<T extends Serializable, PK>
 
 
 	}
+	
 
-	@Override
-	public List<T> encontrePorNome(String name) {
-		return em.createQuery(
-				"from "+" from "+persistedClass.getName()
-				+" WHERE "
-		).getResultList();
-		// TODO
-	}
 
 	@SuppressWarnings("unchecked")
 	@Override
@@ -91,6 +102,10 @@ public abstract  class  CRUD<T extends Serializable, PK>
 			CriteriaBuilder builder = em.getCriteriaBuilder();
 			CriteriaQuery<T> query = builder.createQuery(persistedClass);
 			query.from(persistedClass);
+			System.out.println("LOG DE INFORMATIVO " +
+					"TIPO: PESQUISANDO POR TODAS ENTIDADE DO BANCO \n" +
+					"OPCIONAL: ENTIDADE => "+persistedClass+" \n"+
+					"DATA HORA: "+ LocalDateTime.now() +" \n\n ");
 			return em.createQuery(query).getResultList();
 		} catch (Exception e){
 			throw new PersistenceException("Não foi possível listar o(s) registro(s) da entidade(s)"

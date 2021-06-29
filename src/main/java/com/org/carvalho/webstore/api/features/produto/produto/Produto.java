@@ -20,11 +20,10 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter @Setter
+@Table(name = "produto", indexes = @Index(name = "produto_nome", columnList = "nome"))
 @SequenceGenerator( name = "seq_produto", sequenceName = "seq_produto_api", allocationSize = 1)
 @Entity
 public class Produto  implements Serializable {
-
-	private static final long serialVersionUID = 6606529567344449335L;
 
 	@ApiModelProperty(name = "Identificação do Produto")
     @Column(name = "produtoId")
@@ -33,11 +32,11 @@ public class Produto  implements Serializable {
     private Long id;
 
     @ApiModelProperty(name = "Nome do Produto")
-    @Column(nullable = false)
+    @Column(nullable = false, length = 255)
     private String nome;
 
     @ApiModelProperty(name = "Descrição do Produto")
-    @Column(nullable = false)
+    @Column(nullable = false, length = 2500)
     private String descricao;
 
     @ApiModelProperty(name = "Preço do Produto")
@@ -51,10 +50,12 @@ public class Produto  implements Serializable {
     @ApiModelProperty(name = "Produto Ativo")
     @Column(nullable = false)
     private Boolean ativo = true;
-    /*
+
     @ApiModelProperty(name = "Categoria do Produto")
     @JsonIgnore
     @ManyToMany(mappedBy = "produtos")
     private List<CategoriaProduto> categoriasDosProdutos;
-    */
+
+    @Version
+    private int versao;
 }

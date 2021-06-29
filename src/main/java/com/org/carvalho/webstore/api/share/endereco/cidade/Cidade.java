@@ -1,14 +1,6 @@
 package com.org.carvalho.webstore.api.share.endereco.cidade;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.org.carvalho.webstore.api.share.endereco.estado.Estado;
@@ -33,6 +25,7 @@ import java.io.Serializable;
 @Getter @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Table(name = "cidade", indexes = @Index(name = "cidade_nome", columnList = "nome"))
 @SequenceGenerator(name = "seq_cidade", sequenceName = "seq_cidade_api", allocationSize = 1)
 @Entity
 public class Cidade  implements Serializable {
@@ -49,13 +42,13 @@ public class Cidade  implements Serializable {
 
     @ApiModelProperty(name = "País de Localização")
     @JsonIgnore
-    @JoinColumn(name = "paisId", nullable = false, referencedColumnName = "paisId")
+    @JoinColumn(name = "paisId", nullable = false, referencedColumnName = "paisId", foreignKey = @ForeignKey(name = "fk_cidade_pais"))
     @ManyToOne
     private Pais pais;
 
     @ApiModelProperty(name = "Estado de Localização da Cidade")
     @JsonIgnore
-    @JoinColumn(name = "estadoId", nullable = false, referencedColumnName = "estadoId")
+    @JoinColumn(name = "estadoId", nullable = false, referencedColumnName = "estadoId", foreignKey = @ForeignKey(name = "fk_cidade_estado"))
     @ManyToOne
     private Estado estado;
 

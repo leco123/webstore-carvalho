@@ -27,6 +27,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter @Setter
+@Table(name = "endereco", indexes = @Index(name = "endereco_nome", columnList = "nome"))
 @SequenceGenerator(name = "seq_endereco", sequenceName = "seq_endereco_api", allocationSize = 1)
 @Entity
 public class Endereco  implements Serializable {
@@ -41,23 +42,23 @@ public class Endereco  implements Serializable {
     @Column(nullable = false)
     private String nome;
 
-    @ApiModelProperty(name = "País de Localização do Bairro")
-    @JoinColumn(nullable = false, name = "paisId", referencedColumnName = "paisId")
+    @ApiModelProperty(name = "País de Localização ")
+    @JoinColumn(nullable = false, name = "paisId", referencedColumnName = "paisId", foreignKey = @ForeignKey(name = "fk_endereco_pais"))
     @OneToOne
     private Pais pais;
 
-    @ApiModelProperty(name = "Estado de Localização do Bairro")
-    @JoinColumn(nullable = false, name = "estadoId", referencedColumnName = "estadoId")
+    @ApiModelProperty(name = "Estado de Localização")
+    @JoinColumn(nullable = false, name = "estadoId", referencedColumnName = "estadoId", foreignKey = @ForeignKey(name = "fk_endereco_estado"))
     @OneToOne
     private Estado estado;
 
-    @ApiModelProperty(name = "Cidade de Localização do Bairro")
-    @JoinColumn(nullable = false, name = "cidadeId", referencedColumnName = "cidadeId")
+    @ApiModelProperty(name = "Cidade de Localização")
+    @JoinColumn(nullable = false, name = "cidadeId", referencedColumnName = "cidadeId", foreignKey = @ForeignKey(name = "fk_endereco_cidade"))
     @OneToOne
     private Cidade cidade;
 
     @ApiModelProperty(name = "Bairro de Localização")
-    @JoinColumn(nullable = false, name = "bairroId", referencedColumnName = "bairroId")
+    @JoinColumn(nullable = false, name = "bairroId", referencedColumnName = "bairroId", foreignKey = @ForeignKey(name = "fk_endereco_bairro"))
     @OneToOne
     private Bairro bairro;
 
