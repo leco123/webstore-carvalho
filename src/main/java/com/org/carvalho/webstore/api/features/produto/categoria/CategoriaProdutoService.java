@@ -47,7 +47,7 @@ public class CategoriaProdutoService {
     @Path("{codigo}")
     public CategoriaProduto getCategoriaId(@PathParam("codigo") Long codigoCategoria) {
 		try {
-			return categoriaResource.encontrePorId(codigoCategoria);
+			return this.categoriaResource.obterPorId(codigoCategoria);
 		} catch (Exception e) {
 			LOGGER.severe(e.getMessage());
 			throw  new WebApplicationException(500);
@@ -56,7 +56,7 @@ public class CategoriaProdutoService {
 
 	@GET
     @Path("/todas")
-    public List<CategoriaDTO> getListCategoriasDTO() {
+    public List<CategoriaProdutoDTO> getListCategoriasDTO() {
 		try {
 			return categoriaResource.obterCategoriasDTO();
 		} catch (Exception e) {
@@ -87,7 +87,7 @@ public class CategoriaProdutoService {
 			CategoriaProduto categoria = new CategoriaProduto();
 			CategoriaProduto categoria2 = new CategoriaProduto();
 
-			Unidade unidade = unidadeResource.encontrePorId(1L);
+			Unidade unidade = unidadeResource.obterPorId(1L);
 
 			categoria.setNome("Categoria de Teste 1 (UM)");
 			categoria.setAtivo(true);

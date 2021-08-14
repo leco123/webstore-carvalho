@@ -19,7 +19,7 @@ import java.io.Serializable;
  *
  * Classe Model Moeda, representa a entidade "moeda", exemplo REAL, EURO, DÓLAR...
  */
-@ApiModel(description = "Moeda")
+@ApiModel(value = "Moedas",description = "Moedas")
 @Getter @Setter
 @NoArgsConstructor
 @AllArgsConstructor
@@ -43,7 +43,7 @@ public class Moeda  implements Serializable {
     private String nome;
     
     @ApiModelProperty(name = "Símbolo da Moeda")
-    @Column(nullable = false, length = 5)
+    @Column(nullable = false, length = 5, unique = true)
     private String simbolo;
 
 

@@ -23,7 +23,7 @@ import java.io.Serializable;
  *
  * Classe Model que representa o "Endereço" de Localização de Uma Instituição, Empresa ou Pessoa
  */
-@ApiModel(description = "Endereço")
+@ApiModel(value="Endereço", description = "Endereço")
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter @Setter

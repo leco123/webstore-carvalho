@@ -21,7 +21,7 @@ import java.io.Serializable;
  *
  * Classe Model País, representa a entidade do "pais" como Brasil, Alemanhã, Japão, US...
  */
-@ApiModel(description = "País")
+@ApiModel(value = "País", description = "País")
 @Entity
 @Table(name = "pais", indexes = @Index(name = "pais_nome", columnList = "nome"))
 @SequenceGenerator( name = "seq_pais", sequenceName = "seq_pais_api", allocationSize = 1)
@@ -55,7 +55,7 @@ public class Pais  implements Serializable {
     private Continente continente;
 
     @ApiModelProperty(name = "Moeda oficial do País")
-    @ManyToOne
+    @OneToOne
     @JoinColumn(nullable = false, name = "moedaId", foreignKey = @ForeignKey(name = "fk_pais_moeda"))
     private Moeda moeda;
 

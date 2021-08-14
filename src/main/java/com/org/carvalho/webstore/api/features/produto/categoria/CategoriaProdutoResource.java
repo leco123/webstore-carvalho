@@ -35,7 +35,6 @@ public  class CategoriaProdutoResource extends CRUD<CategoriaProduto, Long>
 		catch (Exception err) { 
 			throw new RuntimeException(err.getMessage());
 		}
-		
 	}
 
 	@Override
@@ -76,17 +75,16 @@ public  class CategoriaProdutoResource extends CRUD<CategoriaProduto, Long>
 		}
 	}
 
-	public List<CategoriaDTO> obterCategoriasDTO() {
+	public List<CategoriaProdutoDTO> obterCategoriasDTO() {
 		try {
 			String jpql = "select u from CategoriaProduto c left join fetch c.unidade u ";
-			TypedQuery<CategoriaDTO>  categoriaDTO = em.createQuery(jpql, CategoriaDTO.class);
-			List<CategoriaDTO> listCategoriaDTO = categoriaDTO.getResultList();
+			TypedQuery<CategoriaProdutoDTO>  categoriaDTO = em.createQuery(jpql, CategoriaProdutoDTO.class);
+			List<CategoriaProdutoDTO> listCategoriaDTO = categoriaDTO.getResultList();
 			return listCategoriaDTO;
 		}
 		catch (Exception e) {
 			throw new PersistenceException("Não foi possível listar o(s) registro(s) da Categoria DTO"
 					+"\n INFO: "+e);
 		}
-		
 	}
 }

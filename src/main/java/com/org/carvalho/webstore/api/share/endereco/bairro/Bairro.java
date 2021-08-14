@@ -22,7 +22,7 @@ import java.io.Serializable;
  *
  * Classe Model que representa o "Bairro" de uma Cidade/Município
  */
-@ApiModel(description = "Bairro do Município")
+@ApiModel(value = "Bairro do Município", description = "Bairro do Município")
 @Getter @Setter
 @NoArgsConstructor
 @AllArgsConstructor

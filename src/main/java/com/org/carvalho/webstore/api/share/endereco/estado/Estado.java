@@ -20,7 +20,7 @@ import java.io.Serializable;
  *
  * Classe Model que representa o "Estado" de um País
  */
-@ApiModel(description = "Estado do País")
+@ApiModel(value = "Estado do País", description = "Estado do País")
 @Getter @Setter
 @NoArgsConstructor
 @AllArgsConstructor

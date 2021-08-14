@@ -21,7 +21,7 @@ import java.io.Serializable;
  *
  * Classe Model que representa a "Cidade/Município" de um Estado o Provincia
  */
-@ApiModel(description = "Cidade do Estado")
+@ApiModel(value = "Cidade do Estado", description = "Cidade do Estado")
 @Getter @Setter
 @NoArgsConstructor
 @AllArgsConstructor

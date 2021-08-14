@@ -8,12 +8,11 @@ import com.org.carvalho.webstore.api.share.util.crud.CRUD;
 import com.org.carvalho.webstore.api.share.util.crud.CrudBasic;
 
 @RequestScoped
-public class UnidadeResource extends CRUD<Unidade, Long>  implements CrudBasic<Unidade>{
+public class UnidadeResource extends CRUD<Unidade, Long>  implements CrudBasic<Unidade> {
 
 	protected UnidadeResource() {
 		super(Unidade.class);
 	}
-
 
 	@Override
 	public Unidade adicionar(Unidade entidade) {
