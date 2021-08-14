@@ -1,5 +1,6 @@
 package com.org.carvalho.webstore.api.share.util.crud;
 
+import com.org.carvalho.webstore.api.share.util.crud.exception.RegistroNaoEncontradoException;
 import lombok.*;
 
 import javax.inject.Inject;
@@ -52,11 +53,11 @@ public  class  CRUD<T , PK extends Serializable>  {
 			em.persist(entidade);
 		} catch (PersistenceException e) {
 			e.printStackTrace();
-			throw new PersistenceException("Não foi possível salvar o registro");
+			throw new PersistenceException("Não foi possível salvar o registro", e);
 		} finally {
 			em.flush();
-			return entidade;
 		}
+		return entidade;
 	}
 
 	/**
@@ -74,7 +75,7 @@ public  class  CRUD<T , PK extends Serializable>  {
 			return entidade;
 		} catch (Exception e) {
 			e.printStackTrace();
-			throw new PersistenceException("Não foi possível atualizar o registro da entidade "+entidade.getClass().getName());
+			throw new PersistenceException("Não foi possível atualizar o registro da entidade "+entidade.getClass().getName(), e);
 		} finally {
 			em.flush();
 		}
@@ -89,15 +90,18 @@ public  class  CRUD<T , PK extends Serializable>  {
 		try {
 			T entity = encontrePorId(id);
 			T mergedEntity = em.merge(entity);
-			em.remove(mergedEntity);
+			if (mergedEntity == null) {
+				throw new RegistroNaoEncontradoException("Registro não encontrado");
+			}
 			System.out.println("LOG DE PERSISTENCIA: " +
 					"TIPO: REMOVENDO ENTIDADE \n" +
 					"OPCIONAL: "+entity.toString()+" \n"+
 					"DATA HORA: "+ LocalDateTime.now() +" \n\n ");
+			em.remove(mergedEntity);
 			return entity;
 		} catch (Exception e) {
 			e.printStackTrace();
-			throw new PersistenceException("Não foi possível remover o registro com código: " +id);
+			throw new PersistenceException("Não foi possível remover o registro com código: " +id, e);
 		} finally {
 			em.flush();
 		}
@@ -116,12 +120,12 @@ public  class  CRUD<T , PK extends Serializable>  {
 					"OPCIONAL: "+id.toString()+" \n"+
 					"DATA HORA: "+ LocalDateTime.now() +" \n\n ");
 			if (entidade == null) {
-				throw new PersistenceException("Registro não encontrado");
+				throw new RegistroNaoEncontradoException("Registro não encontrado");
 			}
 			return entidade;
 		} catch (Exception e) {
 			e.printStackTrace();
-			throw new PersistenceException("Não foi possível encontrar o registro");
+			throw new PersistenceException("Não foi possível encontrar o registro", e);
 		}
 	}
 
@@ -141,7 +145,7 @@ public  class  CRUD<T , PK extends Serializable>  {
 			return em.createQuery(query).getResultList();
 		} catch (Exception e) {
 			e.printStackTrace();
-			throw new PersistenceException("Não foi possível listar o(s) registro(s)");
+			throw new PersistenceException("Não foi possível listar o(s) registro(s)", e);
 		}
 	}
 }

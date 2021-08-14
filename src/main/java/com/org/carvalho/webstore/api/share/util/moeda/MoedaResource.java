@@ -27,9 +27,7 @@ public class MoedaResource  extends CRUD<Moeda, Long> implements CrudBasic<Moeda
     }
 
     @Override
-    public Moeda remover(Long id) {
-        return super.deletePorId(id);
-    }
+    public Moeda remover(Long id) { return super.deletePorId(id); }
 
     @Override
     public Moeda atualizar(Moeda moeda) {
