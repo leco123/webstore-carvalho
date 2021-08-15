@@ -18,13 +18,14 @@ import java.util.Objects;
  */
 @ApiModel(value = "Moedas",description = "Moedas")
 @ToString
-@Getter @Setter
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "moeda", indexes = @Index(name = "moeda_nome", columnList = "nome"))
+@Table(name = "moeda", indexes = {@Index(name = "moeda_nome", columnList = "nome")})
 @SequenceGenerator(name = "seq_moeda", sequenceName = "seq_moeda_api", allocationSize = 1)
 @Entity
-public class Moeda  implements Serializable {
+public class Moeda implements Serializable {
 
 	@ApiModelProperty(name = "Identificação")
     @Column(name = "moedaid")
