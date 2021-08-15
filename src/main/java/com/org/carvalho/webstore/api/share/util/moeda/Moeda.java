@@ -1,17 +1,14 @@
 package com.org.carvalho.webstore.api.share.util.moeda;
 
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-
-import javax.persistence.*;
-
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.*;
+import org.hibernate.Hibernate;
 
+import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Objects;
 
 /**
  * @author Alex de Carvalho
@@ -20,6 +17,7 @@ import java.io.Serializable;
  * Classe Model Moeda, representa a entidade "moeda", exemplo REAL, EURO, DÓLAR...
  */
 @ApiModel(value = "Moedas",description = "Moedas")
+@ToString
 @Getter @Setter
 @NoArgsConstructor
 @AllArgsConstructor
@@ -46,6 +44,13 @@ public class Moeda  implements Serializable {
     @Column(nullable = false, length = 5, unique = true)
     private String simbolo;
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        Moeda moeda = (Moeda) o;
 
+        return Objects.equals(id, moeda.id);
+    }
 }
 

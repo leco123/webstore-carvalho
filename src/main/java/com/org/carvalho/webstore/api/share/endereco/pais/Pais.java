@@ -5,11 +5,7 @@ import com.org.carvalho.webstore.api.share.util.moeda.Moeda;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -22,13 +18,14 @@ import java.io.Serializable;
  * Classe Model País, representa a entidade do "pais" como Brasil, Alemanhã, Japão, US...
  */
 @ApiModel(value = "País", description = "País")
-@Entity
+@ToString
+@EqualsAndHashCode
 @Table(name = "pais", indexes = @Index(name = "pais_nome", columnList = "nome"))
 @SequenceGenerator( name = "seq_pais", sequenceName = "seq_pais_api", allocationSize = 1)
-@Getter
-@Setter
+@Getter @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Entity
 public class Pais  implements Serializable {
 
     @ApiModelProperty(name = "Identificação")
@@ -42,12 +39,12 @@ public class Pais  implements Serializable {
     private String nome;
 
     @ApiModelProperty(name = "Código do País")
-    @Column(nullable = false, length = 4)
+    @Column(nullable = false, length = 4, unique = true)
     private Integer codigoPais;
 
     @ApiModelProperty(name = "Sigla do País")
-    @Column(nullable = false, length = 5)
-    private String Sigla;
+    @Column(nullable = false, length = 5, unique = true)
+    private String sigla;
 
     @ApiModelProperty(name = "Continente do País")
     @Enumerated(EnumType.STRING)

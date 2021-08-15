@@ -2,15 +2,11 @@ package com.org.carvalho.webstore.api.share.endereco.estado;
 
 import javax.persistence.*;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.org.carvalho.webstore.api.share.endereco.pais.Pais;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.io.Serializable;
 
@@ -21,6 +17,8 @@ import java.io.Serializable;
  * Classe Model que representa o "Estado" de um País
  */
 @ApiModel(value = "Estado do País", description = "Estado do País")
+@ToString
+@EqualsAndHashCode
 @Getter @Setter
 @NoArgsConstructor
 @AllArgsConstructor
@@ -40,14 +38,17 @@ public class Estado  implements Serializable {
     private String nome;
 
     @ApiModelProperty(name = "Código da Área")
-    @Column(nullable = false, length = 3)
+    @Column(nullable = false, length = 4, unique = true)
     private Integer ddd;
 
+    @ApiModelProperty(name = "Sigla do Estado")
+    @Column(nullable = false, length = 3, unique = true)
+    private String sigla;
+
     @ApiModelProperty(name = "País onde fica localizado o estado")
-    @JsonIgnore
     @Getter @Setter
     @JoinColumn(name = "paisId", nullable = false, foreignKey = @ForeignKey(name = "fk_estado_pais"))
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     private Pais pais;
 
 }

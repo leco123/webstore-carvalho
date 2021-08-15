@@ -1,5 +1,6 @@
 package com.org.carvalho.webstore.api.share.util.crud;
 
+import com.org.carvalho.webstore.api.share.util.crud.exception.ChaveDuplicadaUniqueExecption;
 import com.org.carvalho.webstore.api.share.util.crud.exception.RegistroNaoEncontradoException;
 import lombok.*;
 
@@ -9,6 +10,7 @@ import javax.persistence.PersistenceException;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.transaction.Transactional;
+import javax.validation.ConstraintViolationException;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -19,19 +21,18 @@ import java.util.List;
  * @param <PK> Primary key ou parâmetro que representa Chave Primária do Banco de Dados
  */
 
-@NoArgsConstructor
 @AllArgsConstructor
 @ToString
 @EqualsAndHashCode
 @Transactional
 public  class  CRUD<T , PK extends Serializable>  {
 
+	private static Object pers = null;
 	@Inject
 	protected EntityManager em;
 	private Class<T> persistedClass;
 
 	public CRUD(Class<T> persistedClass) {
-		this();
 		this.persistedClass = persistedClass;
 		System.out.println("LOG DE PERSISTENCIA: " +
 				"TIPO: CARREGANDO CONSTRUCTOR \n" +
@@ -51,13 +52,14 @@ public  class  CRUD<T , PK extends Serializable>  {
 					"OPCIONAL: "+entidade.toString()+" \n"+
 					"DATA HORA: "+ LocalDateTime.now() +" \n\n ");
 			em.persist(entidade);
-		} catch (PersistenceException e) {
+			return entidade;
+		} catch (Exception e) {
 			e.printStackTrace();
-			throw new PersistenceException("Não foi possível salvar o registro", e);
+			throw new RuntimeException(e.getMessage());
 		} finally {
 			em.flush();
 		}
-		return entidade;
+
 	}
 
 	/**
@@ -72,13 +74,14 @@ public  class  CRUD<T , PK extends Serializable>  {
 					"TIPO: UPDATE ENTIDADE \n" +
 					"OPCIONAL: "+entidade.toString()+" \n"+
 					"DATA HORA: "+ LocalDateTime.now() +" \n\n ");
-			return entidade;
+
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new PersistenceException("Não foi possível atualizar o registro da entidade "+entidade.getClass().getName(), e);
 		} finally {
 			em.flush();
 		}
+		return entidade;
 	}
 
 	/**
@@ -87,8 +90,8 @@ public  class  CRUD<T , PK extends Serializable>  {
 	 * @return Object T entidade
 	 */
 	protected T deletePorId(PK id) {
+		T entity = encontrePorId(id);
 		try {
-			T entity = encontrePorId(id);
 			T mergedEntity = em.merge(entity);
 			if (mergedEntity == null) {
 				throw new RegistroNaoEncontradoException("Registro não encontrado");
@@ -98,13 +101,14 @@ public  class  CRUD<T , PK extends Serializable>  {
 					"OPCIONAL: "+entity.toString()+" \n"+
 					"DATA HORA: "+ LocalDateTime.now() +" \n\n ");
 			em.remove(mergedEntity);
-			return entity;
+
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new PersistenceException("Não foi possível remover o registro com código: " +id, e);
 		} finally {
 			em.flush();
 		}
+		return entity;
 	}
 
 	/**

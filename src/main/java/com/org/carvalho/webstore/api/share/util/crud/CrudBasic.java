@@ -4,7 +4,7 @@ import java.util.List;
 
 public interface CrudBasic<Entidade> {
 
-    Entidade adicionar(Entidade entidade);
+    Entidade adicionar(Entidade entidade) throws Exception;
 
     List<Entidade> obterTudo();
 

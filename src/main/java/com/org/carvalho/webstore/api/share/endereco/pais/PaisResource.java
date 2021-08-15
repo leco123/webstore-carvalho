@@ -15,26 +15,26 @@ public class PaisResource extends CRUD<Pais, Long> implements CrudBasic<Pais> {
 
     @Override
     public Pais adicionar(Pais pais) {
-        return this.salvar(pais);
+        return super.salvar(pais);
     }
 
     @Override
     public List<Pais> obterTudo() {
-        return encontreTodos();
+        return super.encontreTodos();
     }
 
     @Override
     public Pais obterPorId(Long id) {
-        return encontrePorId(id);
+        return super.encontrePorId(id);
     }
 
     @Override
     public Pais remover(Long id) {
-        return deletePorId(id);
+        return super.deletePorId(id);
     }
 
     @Override
     public Pais atualizar(Pais pais) {
-        return update(pais);
+        return super.update(pais);
     }
 }
