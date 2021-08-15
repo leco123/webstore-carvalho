@@ -45,13 +45,5 @@ public class Moeda implements Serializable {
     @Column(nullable = false, length = 5, unique = true)
     private String simbolo;
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
-        Moeda moeda = (Moeda) o;
-
-        return Objects.equals(id, moeda.id);
-    }
 }
 
