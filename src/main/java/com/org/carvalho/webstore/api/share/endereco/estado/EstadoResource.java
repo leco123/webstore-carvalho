@@ -2,11 +2,8 @@ package com.org.carvalho.webstore.api.share.endereco.estado;
 
 import com.org.carvalho.webstore.api.share.util.crud.CRUD;
 import com.org.carvalho.webstore.api.share.util.crud.CrudBasic;
-import com.org.carvalho.webstore.api.share.util.crud.exception.ChaveDuplicadaUniqueExecption;
-import org.hibernate.exception.ConstraintViolationException;
 
 import javax.enterprise.context.RequestScoped;
-import javax.persistence.PersistenceException;
 import java.util.List;
 
 @RequestScoped

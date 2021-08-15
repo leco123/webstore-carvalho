@@ -8,21 +8,19 @@ import com.org.carvalho.webstore.api.share.endereco.pais.Pais;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.io.Serializable;
 
 /**
+ * Classe Model que representa a "Cidade/Município" de um Estado ou Província
  * @author Alex de Carvalho
  * @version 1.0.0-alpha
- *
- * Classe Model que representa a "Cidade/Município" de um Estado o Provincia
  */
 @ApiModel(value = "Cidade do Estado", description = "Cidade do Estado")
 @Getter @Setter
+@ToString
+@EqualsAndHashCode
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "cidade", indexes = @Index(name = "cidade_nome", columnList = "nome"))
@@ -41,13 +39,11 @@ public class Cidade  implements Serializable {
     private String nome;
 
     @ApiModelProperty(name = "País de Localização")
-    @JsonIgnore
     @JoinColumn(name = "paisId", nullable = false, referencedColumnName = "paisId", foreignKey = @ForeignKey(name = "fk_cidade_pais"))
     @ManyToOne
     private Pais pais;
 
     @ApiModelProperty(name = "Estado de Localização da Cidade")
-    @JsonIgnore
     @JoinColumn(name = "estadoId", nullable = false, referencedColumnName = "estadoId", foreignKey = @ForeignKey(name = "fk_cidade_estado"))
     @ManyToOne
     private Estado estado;

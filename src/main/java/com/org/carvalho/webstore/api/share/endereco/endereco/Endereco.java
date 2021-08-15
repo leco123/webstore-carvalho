@@ -10,10 +10,7 @@ import com.org.carvalho.webstore.api.share.endereco.pais.Pais;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.io.Serializable;
 
@@ -26,6 +23,8 @@ import java.io.Serializable;
 @ApiModel(value="Endereço", description = "Endereço")
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString
+@EqualsAndHashCode
 @Getter @Setter
 @Table(name = "endereco", indexes = @Index(name = "endereco_nome", columnList = "nome"))
 @SequenceGenerator(name = "seq_endereco", sequenceName = "seq_endereco_api", allocationSize = 1)
@@ -73,6 +72,6 @@ public class Endereco  implements Serializable {
     private String latitude;
 
     @ApiModelProperty(name = "Coordenada Geográfica de Longitude")
-    private String Longitude;
+    private String longitude;
 
 }

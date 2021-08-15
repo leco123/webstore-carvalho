@@ -1,6 +1,5 @@
 package com.org.carvalho.webstore.api.share.util.crud;
 
-import com.org.carvalho.webstore.api.share.util.crud.exception.ChaveDuplicadaUniqueExecption;
 import com.org.carvalho.webstore.api.share.util.crud.exception.RegistroNaoEncontradoException;
 import lombok.*;
 
@@ -10,7 +9,6 @@ import javax.persistence.PersistenceException;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.transaction.Transactional;
-import javax.validation.ConstraintViolationException;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -21,7 +19,7 @@ import java.util.List;
  * @param <PK> Primary key ou parâmetro que representa Chave Primária do Banco de Dados
  */
 
-@AllArgsConstructor
+//@AllArgsConstructor
 @ToString
 @EqualsAndHashCode
 @Transactional
@@ -59,7 +57,6 @@ public  class  CRUD<T , PK extends Serializable>  {
 		} finally {
 			em.flush();
 		}
-
 	}
 
 	/**
