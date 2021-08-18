@@ -1,17 +1,16 @@
 package com.org.carvalho.webstore.api.share.endereco.bairro;
 
-import javax.persistence.*;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.org.carvalho.webstore.api.share.endereco.cidade.Cidade;
 import com.org.carvalho.webstore.api.share.endereco.estado.Estado;
 import com.org.carvalho.webstore.api.share.endereco.pais.Pais;
-
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.*;
+import org.hibernate.Hibernate;
 
+import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Objects;
 
 /**
  * @author Alex de Carvalho
@@ -22,7 +21,6 @@ import java.io.Serializable;
 @ApiModel(value = "Bairro do Município", description = "Bairro do Município")
 @Getter @Setter
 @ToString
-@EqualsAndHashCode
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "bairro", indexes = @Index(name = "bairro_nome", columnList = "nome"))
@@ -54,4 +52,18 @@ public class Bairro  implements Serializable {
     @JoinColumn(nullable = false, name = "cidadeId", referencedColumnName = "cidadeId", foreignKey = @ForeignKey(name = "fk_bairro_cidade"))
     @ManyToOne
     private Cidade cidade;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        Bairro bairro = (Bairro) o;
+
+        return Objects.equals(id, bairro.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return 1815871210;
+    }
 }

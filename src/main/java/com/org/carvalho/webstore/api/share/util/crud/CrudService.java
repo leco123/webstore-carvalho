@@ -19,7 +19,7 @@ public interface CrudService<T, PK extends Serializable> {
     /**
      * Gravar Entidade
      * @param entidade Entidade
-     * @return Object T
+     * @return T
      */
     @ApiOperation("Gravar Entidade")
     @POST
@@ -29,7 +29,7 @@ public interface CrudService<T, PK extends Serializable> {
     /**
      * Atualizar Entidade
      * @param entidade Entidade
-     * @return Object T
+     * @return T
      */
     @ApiOperation("Atualizar Entidade")
     @PUT
@@ -39,7 +39,7 @@ public interface CrudService<T, PK extends Serializable> {
     /**
      * Remover Entidade
      * @param id
-     * @return Object T
+     * @return T
      */
     @ApiOperation("Remover Entidade")
     @DELETE
@@ -50,7 +50,7 @@ public interface CrudService<T, PK extends Serializable> {
     /**
      * Buscar por ID
      * @param id
-     * @return Object T
+     * @return T
      */
     @GET
     @Path("{id}")
