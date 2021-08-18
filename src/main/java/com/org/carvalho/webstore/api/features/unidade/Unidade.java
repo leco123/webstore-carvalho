@@ -76,8 +76,4 @@ public class Unidade  implements Serializable {
     @Column(nullable = false)
     private Boolean ativo = true;
 
-    @ApiModelProperty("Categoria dos produtos")
-    @JsonIgnore
-    @OneToMany(mappedBy = "unidade")
-    private List<CategoriaProduto> categoriaProdutos;
 }

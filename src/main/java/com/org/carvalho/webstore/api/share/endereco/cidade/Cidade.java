@@ -1,16 +1,15 @@
 package com.org.carvalho.webstore.api.share.endereco.cidade;
 
-import javax.persistence.*;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.org.carvalho.webstore.api.share.endereco.estado.Estado;
 import com.org.carvalho.webstore.api.share.endereco.pais.Pais;
-
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.*;
+import org.hibernate.Hibernate;
 
+import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Objects;
 
 /**
  * Classe Model que representa a "Cidade/Município" de um Estado ou Província
@@ -20,7 +19,6 @@ import java.io.Serializable;
 @ApiModel(value = "Cidade do Estado", description = "Cidade do Estado")
 @Getter @Setter
 @ToString
-@EqualsAndHashCode
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "cidade", indexes = @Index(name = "cidade_nome", columnList = "nome"))
@@ -48,5 +46,18 @@ public class Cidade  implements Serializable {
     @ManyToOne
     private Estado estado;
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        Cidade cidade = (Cidade) o;
+
+        return Objects.equals(id, cidade.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return 1404396432;
+    }
 }
 

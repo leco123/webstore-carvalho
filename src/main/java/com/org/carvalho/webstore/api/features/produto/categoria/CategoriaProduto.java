@@ -1,17 +1,17 @@
 package com.org.carvalho.webstore.api.features.produto.categoria;
 
-import java.io.Serializable;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.persistence.*;
-
 import com.org.carvalho.webstore.api.features.produto.produto.Produto;
 import com.org.carvalho.webstore.api.features.unidade.Unidade;
-import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.*;
+import org.hibernate.Hibernate;
+
+import javax.persistence.*;
+import java.io.Serializable;
+import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Objects;
 
 /**
  * @author Alex de Carvalho
@@ -20,7 +20,8 @@ import lombok.*;
  * Classe Model Categoria do Produto que representa entidade "categoriaproduto"
  */
 
-@Api("Categoria de Produtos")
+@ApiModel("Categoria de Produtos")
+@ToString
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter @Setter
@@ -52,7 +53,7 @@ public class CategoriaProduto implements Serializable {
     private Boolean ativo = true;
 
     @ApiModelProperty(name = "Produtos que fazem parte da categoria")
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinTable(name = "relCategoriaProduto",
                indexes = {
                         @Index(name = "categoriaProdutoId", columnList ="categoriaProdutoId" ),
@@ -61,13 +62,26 @@ public class CategoriaProduto implements Serializable {
                joinColumns =  @JoinColumn(name = "categoriaProdutoId", foreignKey = @ForeignKey(name = "fk_relCategoriaProduto_produto")),
                inverseJoinColumns =  @JoinColumn(name = "produtoId", foreignKey = @ForeignKey(name = "fk_relCategoriaProduto_categoria"))
     )
-    private List<Produto> produtos = new ArrayList<>();
+    @ToString.Exclude
+    private Produto produtos;
 
     @NonNull
     @ApiModelProperty(name = "Unidade/Estabelecimento")
-    @ManyToOne
+    @OneToMany
     @JoinColumn(name = "unidadeId", nullable = false, foreignKey = @ForeignKey(name = "fk_categoriaproduto_unidade"))
-    private Unidade unidade;
+    private List<Unidade> unidade;
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        CategoriaProduto that = (CategoriaProduto) o;
 
+        return Objects.equals(id, that.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return 695903200;
+    }
 }

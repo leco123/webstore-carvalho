@@ -1,22 +1,21 @@
 package com.org.carvalho.webstore.api.features.produto.produto;
 
-import java.io.Serializable;
-import java.math.BigDecimal;
-import java.time.LocalDateTime;
-import java.util.List;
-
-import javax.persistence.*;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.org.carvalho.webstore.api.features.produto.categoria.CategoriaProduto;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+import org.hibernate.Hibernate;
+
+import javax.persistence.*;
+import java.io.Serializable;
+import java.math.BigDecimal;
+import java.sql.Blob;
+import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Objects;
 
 @Api("Produto")
+@ToString
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter @Setter
@@ -37,7 +36,8 @@ public class Produto  implements Serializable {
 
     @ApiModelProperty(name = "Descrição do Produto")
     @Column(nullable = false, length = 2500)
-    private String descricao;
+    @Lob
+    private Blob descricao;
 
     @ApiModelProperty(name = "Preço do Produto")
     @Column(nullable = false)
@@ -45,6 +45,7 @@ public class Produto  implements Serializable {
     	
     @ApiModelProperty(name = "Data do cadastro")
     @Column(name = "datacadastro")
+    @JoinColumn
     private LocalDateTime datacadastro;
 
     @ApiModelProperty(name = "Produto Ativo")
@@ -52,10 +53,23 @@ public class Produto  implements Serializable {
     private Boolean ativo = true;
 
     @ApiModelProperty(name = "Categoria do Produto")
-    @JsonIgnore
-    @ManyToMany(mappedBy = "produtos")
+    @OneToMany(mappedBy = "produtos",fetch = FetchType.LAZY)
     private List<CategoriaProduto> categoriasDosProdutos;
 
     @Version
     private int versao;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        Produto produto = (Produto) o;
+
+        return Objects.equals(id, produto.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return 1852208554;
+    }
 }

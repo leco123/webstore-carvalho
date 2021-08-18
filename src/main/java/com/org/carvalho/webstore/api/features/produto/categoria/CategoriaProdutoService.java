@@ -9,16 +9,17 @@ import javax.ws.rs.core.Response;
 
 import com.org.carvalho.webstore.api.features.unidade.Unidade;
 import com.org.carvalho.webstore.api.features.unidade.UnidadeResource;
+import com.org.carvalho.webstore.api.share.endereco.bairro.Bairro;
+import com.org.carvalho.webstore.api.share.util.crud.CrudService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.logging.Logger;
-
+@Api("Categoria")
 @Path("/api/v1/produto/categoria")
-@Consumes(MediaType.APPLICATION_JSON)
-@Produces(MediaType.APPLICATION_JSON)
-@Transactional
-public class CategoriaProdutoService {
+public class CategoriaProdutoService implements CrudService<CategoriaProduto, Long> {
 
 	private static final Logger LOGGER = Logger.getLogger(String.valueOf(CategoriaProdutoService.class));
 
@@ -28,34 +29,62 @@ public class CategoriaProdutoService {
     @Inject
 	UnidadeResource unidadeResource;
 
-    /**
-     * Filtra todas as categorias
-     * @author Alex de Carvalho
-     */
-    @GET
-    @Path("ALL")
-    public List<CategoriaProduto> listarTodosOsProduto(){
-    	try {
-    		return categoriaResource.obterTudo();
-		} catch (Exception e) {
-			LOGGER.severe(e.getMessage());
-			throw  new WebApplicationException(500);
-		}
-    }
+	/**
+	 * Gravar CategoriaProduto
+	 * @param entidade CategoriaProduto
+	 * @return CategoriaProduto
+	 */
+	@Override
+	public CategoriaProduto salvar(CategoriaProduto entidade) {
+		return categoriaResource.adicionar(entidade);
+	}
 
-    @GET
-    @Path("{codigo}")
-    public CategoriaProduto getCategoriaId(@PathParam("codigo") Long codigoCategoria) {
-		try {
-			return this.categoriaResource.obterPorId(codigoCategoria);
-		} catch (Exception e) {
-			LOGGER.severe(e.getMessage());
-			throw  new WebApplicationException(500);
-		}
-    }
+	/**
+	 * Atualizar CategoriaProduto
+	 * @param entidade CategoriaProduto
+	 * @return CategoriaProduto
+	 */
+	@Override
+	public CategoriaProduto atualizar(CategoriaProduto entidade) {
+		return categoriaResource.atualizar(entidade);
+	}
+
+	/**
+	 * Remover CategoriaProduto
+	 * @param id
+	 * @return CategoriaProduto
+	 */
+	@Override
+	public CategoriaProduto removerPorId(Long id) {
+		return categoriaResource.remover(id);
+	}
+
+	/**
+	 * Buscar por ID
+	 * @param id
+	 * @return CategoriaProduto
+	 */
+	@Override
+	public CategoriaProduto encontrePorId(Long id) {
+		return categoriaResource.obterPorId(id);
+	}
+
+
+	/**
+	 * Listar todos os Bairros
+	 * @return List<CategoriaProduto>
+	 */
+	@GET
+	@Path("ALL")
+	@ApiOperation("Retornar todas as Categorias")
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<CategoriaProduto> buscarTodasAsCategorias() {
+		return categoriaResource.obterTudo();
+	}
 
 	@GET
     @Path("/todas")
+	@Produces(MediaType.APPLICATION_JSON)
     public List<CategoriaProdutoDTO> getListCategoriasDTO() {
 		try {
 			return categoriaResource.obterCategoriasDTO();
@@ -67,6 +96,7 @@ public class CategoriaProdutoService {
 
 	@GET
 	@Path("/nome/{nome}")
+	@Produces(MediaType.APPLICATION_JSON)
 	public Response getCategoriaNome(@PathParam("nome") String nome) {
 		try {
 			List<CategoriaProduto>  categorias = categoriaResource.obterPorNome(nome);
@@ -80,70 +110,9 @@ public class CategoriaProdutoService {
 		}
 	}
 
-    @POST
-    public Response adicionarCategoria() {
-    	try {
-    		
-			CategoriaProduto categoria = new CategoriaProduto();
-			CategoriaProduto categoria2 = new CategoriaProduto();
-
-			Unidade unidade = unidadeResource.obterPorId(1L);
-
-			categoria.setNome("Categoria de Teste 1 (UM)");
-			categoria.setAtivo(true);
-			categoria.setDatahoracadastro(LocalDateTime.now());
-			categoria.setUnidade(unidade);
-
-			categoria2.setNome("Categoria de Teste 2 (DOIS)");
-			categoria2.setAtivo(true);
-			categoria2.setDatahoracadastro(LocalDateTime.now());
-			categoria2.setUnidade(unidade);
-			categoriaResource.adicionar(categoria);
-			categoriaResource.adicionar(categoria2);
-
-			return Response
-					.status(200)
-					.entity("Registro(s) inserido com sucesso: "
-							+categoria.toString())
-					.build();
-		} catch (Exception e) {
-			LOGGER.severe(e.getMessage());
-			throw  new WebApplicationException(500);
-		}
-    }
-
-	@DELETE
-	@Path("/{codigo}")
-	public Response removerCategoria(@PathParam("codigo") Long codigoCategoria) {
-    	try {
-    		categoriaResource.remover(codigoCategoria);
-			return Response
-					.status(200)
-					.entity("Registro removido com sucesso.")
-					.build();
-		} catch (Exception e) {
-			LOGGER.severe(e.getMessage());
-			throw  new WebApplicationException(500);
-		}
-
-	}
-
-	@PUT
-	public Response updateCategoria(CategoriaProduto categoriaProduto) {
-		try {
-			categoriaResource.atualizar(categoriaProduto);
-			return Response
-					.status(200)
-					.entity("Registro atualizado com sucesso. \n "+ categoriaProduto)
-					.build();
-		} catch (Exception e) {
-			LOGGER.severe(e.getMessage());
-			throw  new WebApplicationException(500);
-		}
-	}
-
 	@GET
 	@Path("/unidade/categoria/{categoria}")
+	@Produces(MediaType.APPLICATION_JSON)
 	public Response unidadeDaCategoria(@PathParam("categoria") Long categoria) {
 
 		if (categoria == null) {

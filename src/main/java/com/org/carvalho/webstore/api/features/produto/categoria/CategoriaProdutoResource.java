@@ -4,6 +4,7 @@ import com.org.carvalho.webstore.api.features.unidade.Unidade;
 import com.org.carvalho.webstore.api.share.util.crud.CRUD;
 import com.org.carvalho.webstore.api.share.util.crud.CrudBasic;
 
+import java.sql.SQLWarning;
 import java.util.List;
 import javax.enterprise.context.RequestScoped;
 import javax.persistence.PersistenceException;
@@ -19,27 +20,22 @@ public  class CategoriaProdutoResource extends CRUD<CategoriaProduto, Long>
 
 	@Override
 	public CategoriaProduto adicionar(CategoriaProduto categoriaProduto) {
-		return this.salvar(categoriaProduto);
+		return super.salvar(categoriaProduto);
 	}
 
 	@Override
 	public List<CategoriaProduto> obterTudo() {
-		return this.encontreTodos();
+		return super.encontreTodos();
 	}
 
 	@Override
-	public CategoriaProduto obterPorId(Long id) {
-		try {
-			return this.encontrePorId(id);
-		}
-		catch (Exception err) { 
-			throw new RuntimeException(err.getMessage());
-		}
+	public CategoriaProduto obterPorId(Long id)  {
+		return super.encontrePorId(id);
 	}
 
 	@Override
 	public CategoriaProduto remover(Long id) {
-		return this.deletePorId(id);
+		return super.deletePorId(id);
 	}
 
 	@Override
@@ -47,7 +43,7 @@ public  class CategoriaProdutoResource extends CRUD<CategoriaProduto, Long>
 		return update(categoriaProduto);
 	}
 
-	public List<CategoriaProduto> obterPorNome(String name) {
+	public List<CategoriaProduto> obterPorNome(String name)  throws PersistenceException {
 		try {
 			String jpql = "select entidade  from CategoriaProduto entidade where entidade.nome like :nome ";
 			TypedQuery<CategoriaProduto> query =  em.createQuery(jpql, CategoriaProduto.class);
@@ -58,10 +54,9 @@ public  class CategoriaProdutoResource extends CRUD<CategoriaProduto, Long>
 					+"\n INFO: "+e);
 		}
 	}
-
-
-	public Unidade obterUnidadeDaCategoria(Long idCategoria) {
-		try {
+/*
+	public Unidade obterUnidadeDaCategoria(Long idCategoria)  throws PersistenceException {
+	/*	try {
 			 CategoriaProduto categoriaProduto = this.obterPorId(idCategoria);
 
 			String jpql = "select u from Unidade u where u.id = :id ";
@@ -74,8 +69,10 @@ public  class CategoriaProdutoResource extends CRUD<CategoriaProduto, Long>
 					+"\n INFO: "+e);
 		}
 	}
+	*/
 
-	public List<CategoriaProdutoDTO> obterCategoriasDTO() {
+
+	public List<CategoriaProdutoDTO> obterCategoriasDTO() throws PersistenceException {
 		try {
 			String jpql = "select u from CategoriaProduto c left join fetch c.unidade u ";
 			TypedQuery<CategoriaProdutoDTO>  categoriaDTO = em.createQuery(jpql, CategoriaProdutoDTO.class);

@@ -14,10 +14,9 @@ public class BairroResource extends CRUD<Bairro, Long> implements CrudBasic<Bair
     }
 
     /**
-     * Adicionar entidade
-     *
+     * Adicionar Bairro
      * @param bairro
-     * @return Entidade
+     * @return Bairro
      */
     @Override
     public Bairro adicionar(Bairro bairro) {
@@ -26,7 +25,6 @@ public class BairroResource extends CRUD<Bairro, Long> implements CrudBasic<Bair
 
     /**
      * Listar todos os Bairros
-     *
      * @return List<Bairro>
      */
     @Override
@@ -35,10 +33,9 @@ public class BairroResource extends CRUD<Bairro, Long> implements CrudBasic<Bair
     }
 
     /**
-     * Obter Entidade por ID
-     *
+     * Obter Bairro por ID
      * @param id
-     * @return Entidade
+     * @return Bairro
      */
     @Override
     public Bairro obterPorId(Long id) {
@@ -46,10 +43,9 @@ public class BairroResource extends CRUD<Bairro, Long> implements CrudBasic<Bair
     }
 
     /**
-     * Remover Entidade por ID
-     *
+     * Remover Bairro por ID
      * @param id
-     * @return Entidade
+     * @return Bairro
      */
     @Override
     public Bairro remover(Long id) {
@@ -57,10 +53,9 @@ public class BairroResource extends CRUD<Bairro, Long> implements CrudBasic<Bair
     }
 
     /**
-     * Atualizar Entidade
-     *
+     * Atualizar Bairro
      * @param bairro
-     * @return Entidade
+     * @return Bairro
      */
     @Override
     public Bairro atualizar(Bairro bairro) {
