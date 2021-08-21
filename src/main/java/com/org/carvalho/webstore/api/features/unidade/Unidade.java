@@ -1,25 +1,17 @@
 package com.org.carvalho.webstore.api.features.unidade;
 
-import javax.persistence.*;
-import javax.validation.constraints.Email;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.org.carvalho.webstore.api.features.produto.categoria.CategoriaProduto;
 import com.org.carvalho.webstore.api.share.endereco.endereco.Endereco;
 import com.org.carvalho.webstore.api.share.endereco.tipo.TipoEndereco;
 import com.org.carvalho.webstore.api.share.util.moeda.Moeda;
-
 import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+import org.hibernate.Hibernate;
 
+import javax.persistence.*;
+import javax.validation.constraints.Email;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Objects;
 
 /**
  * @author Alex de Carvalho
@@ -30,6 +22,7 @@ import java.util.List;
  */
 
 @Api("Unidade/Estabelecimento")
+@ToString
 @NoArgsConstructor
 @AllArgsConstructor
 @Setter @Getter
@@ -49,7 +42,7 @@ public class Unidade  implements Serializable {
     private String nome;
 
     @ApiModelProperty("Unidade principal")
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private Boolean principal = false;
 
     @ApiModelProperty("E-mail principal da Unidade")
@@ -76,4 +69,17 @@ public class Unidade  implements Serializable {
     @Column(nullable = false)
     private Boolean ativo = true;
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        Unidade unidade = (Unidade) o;
+
+        return Objects.equals(id, unidade.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return 287098545;
+    }
 }
