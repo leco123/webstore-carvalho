@@ -1,7 +1,5 @@
 package com.org.carvalho.webstore.api.features.produto.categoria;
 
-import com.org.carvalho.webstore.api.features.produto.produto.Produto;
-import com.org.carvalho.webstore.api.features.unidade.Unidade;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.*;
@@ -10,7 +8,6 @@ import org.hibernate.Hibernate;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.List;
 import java.util.Objects;
 
 /**
@@ -27,9 +24,7 @@ import java.util.Objects;
 @Getter @Setter
 @SequenceGenerator(name = "seq_categoria_produto", sequenceName = "seq_categoria_produto_api", allocationSize = 1, initialValue = 1)
 @Table(name = "CategoriaProduto",
-        indexes = {
-                @Index(name = "categoriaproduto_nome", columnList = "nome")
-        }
+   indexes = {@Index(name = "categoriaproduto_nome", columnList = "nome")}
 )
 @Entity
 public class CategoriaProduto implements Serializable {
@@ -52,24 +47,35 @@ public class CategoriaProduto implements Serializable {
     @Column(nullable = false)
     private Boolean ativo = true;
 
+    /*
     @ApiModelProperty(name = "Produtos que fazem parte da categoria")
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinTable(name = "relCategoriaProduto",
                indexes = {
                         @Index(name = "categoriaProdutoId", columnList ="categoriaProdutoId" ),
                         @Index(name = "produtoId", columnList = "produtoId")
                },
-               joinColumns =  @JoinColumn(name = "categoriaProdutoId", foreignKey = @ForeignKey(name = "fk_relCategoriaProduto_produto")),
-               inverseJoinColumns =  @JoinColumn(name = "produtoId", foreignKey = @ForeignKey(name = "fk_relCategoriaProduto_categoria"))
+               joinColumns =  @JoinColumn(name = "categoriaProdutoId", nullable = false, foreignKey = @ForeignKey(name = "fk_relCategoriaProduto_produto")),
+               inverseJoinColumns =  @JoinColumn(name = "produtoId", nullable = false, foreignKey = @ForeignKey(name = "fk_relCategoriaProduto_categoria"))
     )
     @ToString.Exclude
     private Produto produtos;
-
+    */
+    /*
     @NonNull
     @ApiModelProperty(name = "Unidade/Estabelecimento")
     @OneToMany
-    @JoinColumn(name = "unidadeId", nullable = false, foreignKey = @ForeignKey(name = "fk_categoriaproduto_unidade"))
+    @JoinTable(name = "relUnidadeCategoria",
+            indexes = {
+                    @Index(name = "unidadeId", columnList ="unidadeId" ),
+                    @Index(name = "categoriaProdutoId", columnList = "categoriaProdutoId")
+            },
+            joinColumns =  @JoinColumn(name = "unidadeId", nullable = false, foreignKey = @ForeignKey(name = "fk_relUnidade_CategoriaProduto")),
+            inverseJoinColumns =  @JoinColumn(name = "categoriaProdutoId", nullable = false, foreignKey = @ForeignKey(name = "fk_relCategoriaProduto_Unidade"))
+    )
+    @ToString.Exclude
     private List<Unidade> unidade;
+    */
 
     @Override
     public boolean equals(Object o) {

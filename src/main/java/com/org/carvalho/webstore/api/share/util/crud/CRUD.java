@@ -25,10 +25,9 @@ import java.util.List;
 @Transactional
 public  class  CRUD<T , PK extends Serializable>  {
 
-	private static Object pers = null;
 	@Inject
 	protected EntityManager em;
-	private Class<T> persistedClass;
+	final private Class<T> persistedClass;
 
 	public CRUD(Class<T> persistedClass) {
 		this.persistedClass = persistedClass;

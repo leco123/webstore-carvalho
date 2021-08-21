@@ -21,8 +21,6 @@ import java.util.logging.Logger;
 @Path("/api/v1/produto/categoria")
 public class CategoriaProdutoService implements CrudService<CategoriaProduto, Long> {
 
-	private static final Logger LOGGER = Logger.getLogger(String.valueOf(CategoriaProdutoService.class));
-
     @Inject
     CategoriaProdutoResource categoriaResource;
 
@@ -71,29 +69,19 @@ public class CategoriaProdutoService implements CrudService<CategoriaProduto, Lo
 
 
 	/**
-	 * Listar todos os Bairros
+	 * Listar todas as Categorias de Produtos
 	 * @return List<CategoriaProduto>
 	 */
 	@GET
 	@Path("ALL")
 	@ApiOperation("Retornar todas as Categorias")
 	@Produces(MediaType.APPLICATION_JSON)
-	public List<CategoriaProduto> buscarTodasAsCategorias() {
+	public List<CategoriaProduto> buscarTodasAsCategorias() throws Exception {
 		return categoriaResource.obterTudo();
 	}
 
-	@GET
-    @Path("/todas")
-	@Produces(MediaType.APPLICATION_JSON)
-    public List<CategoriaProdutoDTO> getListCategoriasDTO() {
-		try {
-			return categoriaResource.obterCategoriasDTO();
-		} catch (Exception e) {
-			LOGGER.severe(e.getMessage());
-			throw  new WebApplicationException(500);
-		}
-    }
 
+	/*
 	@GET
 	@Path("/nome/{nome}")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -110,35 +98,6 @@ public class CategoriaProdutoService implements CrudService<CategoriaProduto, Lo
 		}
 	}
 
-	@GET
-	@Path("/unidade/categoria/{categoria}")
-	@Produces(MediaType.APPLICATION_JSON)
-	public Response unidadeDaCategoria(@PathParam("categoria") Long categoria) {
-
-		if (categoria == null) {
-			throw new NullPointerException("Código da categoria não pode ser null");
-		}
-
-		try {
-			CategoriaProduto categoriaProduto = categoriaResource.obterPorId(categoria);
-			if (categoriaProduto == null) {
-				throw new NullPointerException("Não foi possível encontrar a categoria de código "+categoria);
-			}
-
-			Unidade unidade = categoriaProduto.getUnidade();
-			if (unidade == null) {
-				throw new NullPointerException("Não foi possível encontrar a unidade da categoria do produto");
-			}
-
-			GenericEntity<Unidade> entidade = new GenericEntity<Unidade>(unidade){};
-			return Response
-					.ok(entidade)
-					.entity(entidade)
-					.build();
-		} catch (Exception e) {
-			LOGGER.severe(e.getMessage());
-			throw  new WebApplicationException(500);
-		}
-	}
+	}*/
 
 }

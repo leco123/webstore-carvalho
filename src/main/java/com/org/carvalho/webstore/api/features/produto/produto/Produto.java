@@ -1,6 +1,5 @@
 package com.org.carvalho.webstore.api.features.produto.produto;
 
-import com.org.carvalho.webstore.api.features.produto.categoria.CategoriaProduto;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.*;
@@ -9,9 +8,7 @@ import org.hibernate.Hibernate;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.sql.Blob;
 import java.time.LocalDateTime;
-import java.util.List;
 import java.util.Objects;
 
 @Api("Produto")
@@ -31,13 +28,14 @@ public class Produto  implements Serializable {
     private Long id;
 
     @ApiModelProperty(name = "Nome do Produto")
-    @Column(nullable = false, length = 255)
+    @Column(nullable = false)
     private String nome;
 
     @ApiModelProperty(name = "Descrição do Produto")
-    @Column(nullable = false, length = 2500)
     @Lob
-    private Blob descricao;
+    @Column(nullable = false)
+    @ToString.Exclude
+    private String descricao;
 
     @ApiModelProperty(name = "Preço do Produto")
     @Column(nullable = false)
@@ -45,16 +43,18 @@ public class Produto  implements Serializable {
     	
     @ApiModelProperty(name = "Data do cadastro")
     @Column(name = "datacadastro")
-    @JoinColumn
     private LocalDateTime datacadastro;
 
     @ApiModelProperty(name = "Produto Ativo")
     @Column(nullable = false)
     private Boolean ativo = true;
 
+    /*
     @ApiModelProperty(name = "Categoria do Produto")
-    @OneToMany(mappedBy = "produtos",fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "produtos")
+    @ToString.Exclude
     private List<CategoriaProduto> categoriasDosProdutos;
+    */
 
     @Version
     private int versao;
