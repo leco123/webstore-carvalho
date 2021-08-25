@@ -7,6 +7,7 @@ import javax.ws.rs.core.GenericEntity;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import com.org.carvalho.webstore.api.features.produto.categoria.dto.CategoriaPorUnidadeEProdutoDTO;
 import com.org.carvalho.webstore.api.features.unidade.Unidade;
 import com.org.carvalho.webstore.api.features.unidade.UnidadeResource;
 import com.org.carvalho.webstore.api.share.endereco.bairro.Bairro;
@@ -80,6 +81,12 @@ public class CategoriaProdutoService implements CrudService<CategoriaProduto, Lo
 		return categoriaResource.obterTudo();
 	}
 
+	@GET
+	@Path("unidade")
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<CategoriaPorUnidadeEProdutoDTO> getCategoriaPorUnidade()  {
+		return categoriaResource.buscarCategoriaPorUnidadeEProduto();
+	}
 
 	/*
 	@GET

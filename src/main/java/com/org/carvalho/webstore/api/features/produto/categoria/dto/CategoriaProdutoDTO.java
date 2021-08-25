@@ -1,4 +1,4 @@
-package com.org.carvalho.webstore.api.features.produto.categoria;
+package com.org.carvalho.webstore.api.features.produto.categoria.dto;
 
 
 import lombok.AllArgsConstructor;
