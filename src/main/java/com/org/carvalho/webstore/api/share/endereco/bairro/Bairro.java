@@ -1,5 +1,6 @@
 package com.org.carvalho.webstore.api.share.endereco.bairro;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.org.carvalho.webstore.api.share.endereco.cidade.Cidade;
 import com.org.carvalho.webstore.api.share.endereco.estado.Estado;
 import com.org.carvalho.webstore.api.share.endereco.pais.Pais;
@@ -39,16 +40,19 @@ public class Bairro  implements Serializable {
     private String nome;
 
     @ApiModelProperty(name = "País de Localização do Bairro")
+    @JsonIgnore
     @JoinColumn(nullable = false, name = "paisId", referencedColumnName = "paisId", foreignKey = @ForeignKey(name = "fk_bairro_pais"))
     @ManyToOne
     private Pais pais;
 
     @ApiModelProperty(name = "Estado de Localização do Bairro")
+    @JsonIgnore
     @JoinColumn(nullable = false, name = "estadoId", referencedColumnName = "estadoId", foreignKey = @ForeignKey(name = "fk_bairro_estado"))
     @ManyToOne
     private Estado estado;
 
     @ApiModelProperty(name = "Cidade de Localização do Bairro")
+    @JsonIgnore
     @JoinColumn(nullable = false, name = "cidadeId", referencedColumnName = "cidadeId", foreignKey = @ForeignKey(name = "fk_bairro_cidade"))
     @ManyToOne
     private Cidade cidade;

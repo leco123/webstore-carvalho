@@ -60,11 +60,6 @@ public class Unidade  implements Serializable {
     @Enumerated(EnumType.STRING)
     private TipoEndereco tipoEndereco;
 
-    @ApiModelProperty(name = "Moeda")
-    @OneToOne
-    @JoinColumn(name = "moedaId", nullable = false, foreignKey = @ForeignKey(name = "fk_unidade_moeda"))
-    private Moeda moeda;
-
     @ApiModelProperty("Unidade ativa no sistema")
     @Column(nullable = false)
     private Boolean ativo = true;

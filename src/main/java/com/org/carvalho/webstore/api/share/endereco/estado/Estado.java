@@ -2,6 +2,7 @@ package com.org.carvalho.webstore.api.share.endereco.estado;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.org.carvalho.webstore.api.share.endereco.pais.Pais;
 
 import io.swagger.annotations.ApiModel;
@@ -46,6 +47,7 @@ public class Estado  implements Serializable {
     private String sigla;
 
     @ApiModelProperty(name = "País onde fica localizado o estado")
+    @JsonIgnore
     @Getter @Setter
     @JoinColumn(name = "paisId", nullable = false, foreignKey = @ForeignKey(name = "fk_estado_pais"))
     @ManyToOne

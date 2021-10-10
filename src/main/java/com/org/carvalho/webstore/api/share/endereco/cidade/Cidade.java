@@ -1,5 +1,6 @@
 package com.org.carvalho.webstore.api.share.endereco.cidade;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.org.carvalho.webstore.api.share.endereco.estado.Estado;
 import com.org.carvalho.webstore.api.share.endereco.pais.Pais;
 import io.swagger.annotations.ApiModel;
@@ -37,11 +38,13 @@ public class Cidade  implements Serializable {
     private String nome;
 
     @ApiModelProperty(name = "País de Localização")
+    @JsonIgnore
     @JoinColumn(name = "paisId", nullable = false, referencedColumnName = "paisId", foreignKey = @ForeignKey(name = "fk_cidade_pais"))
     @ManyToOne
     private Pais pais;
 
     @ApiModelProperty(name = "Estado de Localização da Cidade")
+    @JsonIgnore
     @JoinColumn(name = "estadoId", nullable = false, referencedColumnName = "estadoId", foreignKey = @ForeignKey(name = "fk_cidade_estado"))
     @ManyToOne
     private Estado estado;

@@ -58,7 +58,6 @@ public class CategoriaProduto implements Serializable {
     )
     private List<Unidade> unidade;
 
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

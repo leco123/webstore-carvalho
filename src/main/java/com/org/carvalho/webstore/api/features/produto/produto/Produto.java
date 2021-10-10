@@ -1,14 +1,18 @@
 package com.org.carvalho.webstore.api.features.produto.produto;
 
+import com.org.carvalho.webstore.api.features.produto.categoria.CategoriaProduto;
+import com.org.carvalho.webstore.api.features.unidade.Unidade;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.*;
 import org.hibernate.Hibernate;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Objects;
 
 @Api("Produto")
@@ -49,12 +53,14 @@ public class Produto  implements Serializable {
     @Column(nullable = false)
     private Boolean ativo = true;
 
-    /*
-    @ApiModelProperty(name = "Categoria do Produto")
-    @OneToMany(mappedBy = "produtos")
-    @ToString.Exclude
-    private List<CategoriaProduto> categoriasDosProdutos;
-    */
+    @ApiModelProperty(name = "Categorias do produto")
+    @NotNull
+    @JoinTable(name = "relcategoriaproduto",
+            joinColumns =  @JoinColumn(name = "categoriaProdutoId", nullable = false, foreignKey = @ForeignKey(name = "fk_rel_categoria_Produto")),
+            inverseJoinColumns =  @JoinColumn(name = "produtoId", nullable = false, foreignKey = @ForeignKey(name = "fk_rel_categoriaproduto_produto"))
+    )
+    @OneToMany
+    private List<CategoriaProduto> categoriaProduto;
 
     @Version
     private int versao;
