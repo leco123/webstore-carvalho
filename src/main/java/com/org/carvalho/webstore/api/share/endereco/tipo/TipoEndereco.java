@@ -6,8 +6,8 @@ import lombok.Getter;
 @ApiModel(description = "Tipo de Endereço")
 public enum TipoEndereco {
 
-    RESIDENCIA("Endereço Residêncial"),
-    EMPRESA("Endereço Empresarial");
+    RESIDENCIAL("Endereço Residêncial"),
+    EMPRESARIAL("Endereço Empresarial");
 
     @Getter
     private String descricao;
