@@ -51,7 +51,6 @@ INSERT INTO public.endereco (enderecoid, cep, latitude, longitude, nome, numero,
 INSERT INTO public.endereco (enderecoid, cep, latitude, longitude, nome, numero, bairroid, cidadeid, estadoid, paisid) VALUES(3, 85455255, NULL, NULL, 'Nome da rua 1', '659', 1, 1, 21, 1);
 INSERT INTO public.endereco (enderecoid, cep, latitude, longitude, nome, numero, bairroid, cidadeid, estadoid, paisid) VALUES(4, 58545554, NULL, NULL, 'Nome da rua 2', '984', 1, 1, 21, 1);
 
-
 -- UNIDADES DE TESTE
 INSERT INTO public.unidade (unidadeid, ativo, email, nome, principal, tipoendereco, enderecoid) VALUES(1, true, 'email.unidade@unidade.com', 'Nome da Unidade/Estabelecimento', true, 'EMPRESARIAL', 1);
 INSERT INTO public.unidade (unidadeid, ativo, email, nome, principal, tipoendereco, enderecoid) VALUES(2, true, 'email.unidade2@unidade.2com', 'Outra Unidade de Teste', false, 'EMPRESARIAL', 2);
@@ -101,130 +100,10 @@ INSERT INTO public.relunidadecategoriaproduto (unidadeid, categoriaprodutoid) VA
 INSERT INTO public.relunidadecategoriaproduto (unidadeid, categoriaprodutoid) VALUES(1, 20);
 
 --PRODUTOS DE TESTE
-INSERT INTO public.produto (produtoid, ativo, datacadastro, descricao, nome, preco, versao) VALUES(1, true, '2021-10-04 17:54:41.000', 'Caixinha de som portátil charge mini bluetooth.
-Mini caixinha de som portátil.
-Acompanha caixa protetora.
-Resistente a respingos de água.
-Apertar o botão M (Mode) para alternar entre as funções disponíveis: Bluetooth, Radio FM e Pendrive/Cartão SD.
+INSERT INTO public.produto (produtoid, ativo, datacadastro, descricao, nome, preco, versao) VALUES(1, true, '2021-10-04 17:54:41.000', 'Caixinha de som portátil charge mini bluetooth. Mini caixinha de som portátil. Acompanha caixa protetora. Resistente a respingos de água. Apertar o botão M (Mode) para alternar entre as funções disponíveis: Bluetooth, Radio FM e Pendrive/Cartão SD.', 'Teste Pendrive Cartão', 105.99, 0);
+INSERT INTO public.produto (produtoid, ativo, datacadastro, descricao, nome, preco, versao) VALUES(2, true, '2021-10-04 17:54:41.000', 'Luminária de LED Colorido Musical com Bluetooth Wireless 12W Bivolt com Controle Lâmpada E27 Branca', 'Luminária de LED Colorido Musical com Bluetooth Wireless 12W Bivolt com Controle Lâmpada E27 Branca', 26.99, 0);
+INSERT INTO public.produto (produtoid, ativo, datacadastro, descricao, nome, preco, versao) VALUES(3, true, '2021-10-04 17:54:41.000', 'Conversor Smart Tv Uhd 4k Transforma Sua Tv Em Smart Tv e Internet Android 10.1 hdmi - Mxq Media Player com processador quad core de altiss&iacute;mo desempenho e baixo consumo de energia, ideal para reprodu&ccedil;&atilde;o de cont&eacute;udo multimidia e sistema de Tv via web como exemplo a entre outras milhares de possibilidade que somente a plataforma Android pode trazer.', 'Tv Box Smart 4k Pro 5g 16gb/ 256gb Wifi Android 10.1 Tv Box Smart MXQ PRO 5G 4K', 127.53, 0);
 
-
-Especificações do produto:
-Obs: Tempo de uso depende do volume e do tipo de música.
-Bluetooth.
-Entrada: cabo USB, entrada para cartão de memória
-Sistema speakerphone (atender telefonemas através da caixinha).
-Bateria: 6000mAH.
-
-Medidas:
-6 cm x 16 cm (alt. x larg.)
-
-Itens inclusos:
-1 Mini caixinha de som portátil.
-1 Cabo USB.
-1 Embalagem protetora.', 'Caixinha De Som Portátil Charge Mini Bluetooth Speakerphone', 105.99, 0);
-INSERT INTO public.produto (produtoid, ativo, datacadastro, descricao, nome, preco, versao) VALUES(2, true, '2021-10-04 17:54:41.000', 'Luminária de LED Colorido Musical com Bluetooth Wireless 12W Bivolt com Controle Lâmpada E27 Branca
-
-Essa Luminária incrível vai surpreender você. Seu receptáculo E27 corresponde a uma lâmpada comum, é só instalar no soquete e pronto. Com o controle remoto é possível que você escolha a cor e a intensidade do LED, além de poder controlar a velocidade da troca das cores ou deixar no modo aleatório, strobo ou flash.
-
-O diferencial dessa lâmpada é que, além de ter várias cores em uma, ela também toca música. Isso mesmo! Basta você conectá-la ao Bluetooth do seu celular e ela tocará as suas músicas preferidas. Você pode também acender e apagar a lâmpada pelo controle remoto, deixando sua vida muito mais prática e divertida.
-
-Especificação Técnica:
-. Modelo Redondo com Dissipador de Calor
-. Potência Total: 12W
-. Potência LED: 6W
-. Potência Alto Falante: 3W
-. Frequência: 135Hz – 15KHz
-. Conexão Bluetooth
-. Versão Wireless: 4.2
-. Alcance do Controle Remoto: 10 Metros
-. Controle para Alterar Cor e Intensidade da Luz
-. Reproduz Músicas Através de Bluetooth, Basta Parear o Smartphone
-. Soquete Receptáculo E27
-. Voltagem: Bivolt 100V – 240V
-
-. Medidas Aproximadas (DxA): 10x12,5cm
-
-Conteúdo da Embalagem:
-. 01 Lâmpada LED Musical
-. 01 Controle Remoto', 'Lampada Bluetooth De Led Caixa De Som C Controle Rgb 12W
-', 26.99, 0);
-INSERT INTO public.produto (produtoid, ativo, datacadastro, descricao, nome, preco, versao) VALUES(3, true, '2021-10-04 17:54:41.000', 'Conversor Smart Tv Uhd 4k Transforma Sua Tv Em Smart Tv e Internet Android 10.1 hdmi - Mxq
-
-Media Player com processador quad core de altiss&iacute;mo desempenho e baixo consumo de energia, ideal para reprodu&ccedil;&atilde;o de cont&eacute;udo multimidia e sistema de Tv via web como exemplo a entre outras milhares de possibilidade que somente a plataforma Android pode trazer.
-
--16GB de memoria RAM e 256GB de memoria interna
-
-CARACTER&Iacute;STICAS
-
-- Android 10.1
-
-- Quad-Core Aml-S905
-
-- Ram - DDR3 16Gb
-
-- Wifi Suporta Ieee 802.11 A/B/G/N
-
-- 1 Hdmi 1.4 com suporte para Full Hd e Ultra Hd 4K
-
-- 1 Sa&iacute;da Av 3x Av
-
-- 4 Porta Usb
-
-- 1 Porta de Rede Lan Rj45
-
-- 1 Porta pra Cart&atilde;o Sd - Mmc
-
-- 1 Sa&iacute;da de &aacute;udio P2
-
-Suporta mouse sem fio 2.4Ghz / com fio, e teclado via Usb.
-
-Suporta v&aacute;rios idiomas e v&aacute;rios formatos de v&iacute;deo.
-
-Navega&ccedil;&atilde;o de Internet, baixa aplica&ccedil;&otilde;es Android, e diversos jogos para sua divers&atilde;o etc.
-
-Controle remoto infravermelho permite que voc&ecirc; desfrute de sua maravilhosa vida que o wireless traz para voc&ecirc;.
-
-Material Abs pl&aacute;stico e borracha
-
-Alimenta&ccedil;&atilde;o adaptador 5V 2A
-
-Formatos de suporte
-
-Formatos de &aacute;udio:MP3, Wma, Ape, Flac, Ogg, AC3, Aac
-
-Formatos de v&iacute;deo:Pmp, Avc, Flv, Vob, Mpg, Dat, Mpeg, H.264, MPEG1, MPEG2, Rmvb, MPEG4, Wmv, Tp, Avi, Divx, Mkv, Mov, Hdmov, MP4, M4V
-
-Audio Codecs:AC3, Lpcm, Flac, He-Aac
-
-Codecs de v&iacute;deo:Mpeg-1, Mpeg-2, Mpeg-4, H.264, Vc-1
-
-Formatos de imagem:Jpeg, Bmp, Png, Gif, Tiff, Jps (3D), mpo (3D)
-
-Formatos de legendas:MicroDVD [.sub], SubRip [Srt], Sub Station Alpha [.ssa], Sami [.smi] Idx + subPGS
-
-Resolu&ccedil;&atilde;o de sa&iacute;da:4k
-
-Ele Transforma Sua Tv Em Um Computador.
-
-Mini Teclado Qwerty Sem Fio Totalmente Funcional E Mouse Touchpad Que Cabe Na Palma Da Sua M&atilde;o.
-
-Perfeito Para Pc, Pad, Tv Android, Etc
-
-Caracter&iacute;sticas:
-
-- Compat&iacute;vel Com Notebook, Netbook, Computador, Tablet, Xbox 360, Ps3, Celulares E Smartphones Com A Tecnologia Otg, Smart Tv&#39;S 2d/3d e outros.
-
-Listagem:1 x TV Box Android 10.1
-
-
-
-1 x Adaptador de Energia
-
-1 x Cabo HDMI
-
-1 x Controle Remoto
-
-1 x Manual do Usu&aacute;rio', 'Tv Box Smart 4k Pro 5g 16gb/ 256gb Wifi Android 10.1 Tv Box Smart MXQ PRO 5G 4K', 127.53, 0);
 
 --CATEGORIAS DE CADA PRODUTO
 INSERT INTO public.relcategoriaproduto (categoriaprodutoid, produtoid) VALUES(20, 1);

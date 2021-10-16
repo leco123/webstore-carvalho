@@ -124,16 +124,16 @@ CREATE INDEX produto_nome ON public.produto USING btree (nome);
 CREATE TABLE public.relunidadecategoriaproduto (
                                                    unidadeid int8 NOT NULL,
                                                    categoriaprodutoid int8 NOT NULL,
-                                                   CONSTRAINT fk_rel_categoriaproduto_unidade FOREIGN KEY (categoriaprodutoid) REFERENCES public.unidade(unidadeid),
-                                                   CONSTRAINT fk_rel_unidade_categoriaproduto FOREIGN KEY (unidadeid) REFERENCES public.categoriaproduto(categoriaprodutoid)
+                                                   CONSTRAINT fk_rel_categoriaproduto_unidade FOREIGN KEY (unidadeid) REFERENCES public.unidade(unidadeid),
+                                                   CONSTRAINT fk_rel_unidade_categoriaproduto FOREIGN KEY (categoriaprodutoid) REFERENCES public.categoriaproduto(categoriaprodutoid)
 );
 
 --RELACIONAMENTO ENTRE CATEGORIA E PRODUTOS
 CREATE TABLE public.relcategoriaproduto (
                                             categoriaprodutoid int8 NOT NULL,
                                             produtoid int8 NOT NULL,
-                                            CONSTRAINT fk_rel_categoria_produto FOREIGN KEY (categoriaprodutoid) REFERENCES public.produto(produtoid),
-                                            CONSTRAINT fk_rel_categoriaproduto_produto FOREIGN KEY (produtoid) REFERENCES public.categoriaproduto(categoriaprodutoid)
+                                            CONSTRAINT fk_rel_categoria_produto FOREIGN KEY (categoriaprodutoid) REFERENCES public.categoriaproduto(categoriaprodutoid),
+                                            CONSTRAINT fk_rel_categoriaproduto_produto FOREIGN KEY (produtoid) REFERENCES public.produto(produtoid)
 );
 
 

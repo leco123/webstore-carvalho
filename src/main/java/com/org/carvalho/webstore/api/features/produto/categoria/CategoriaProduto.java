@@ -53,8 +53,8 @@ public class CategoriaProduto implements Serializable {
     @NotNull
     @OneToMany
     @JoinTable(name = "relUnidadeCategoriaProduto",
-            joinColumns =  @JoinColumn(name = "unidadeId", nullable = false, foreignKey = @ForeignKey(name = "fk_rel_Unidade_CategoriaProduto")),
-            inverseJoinColumns =  @JoinColumn(name = "categoriaProdutoId", nullable = false, foreignKey = @ForeignKey(name = "fk_rel_CategoriaProduto_Unidade"))
+            joinColumns =  @JoinColumn(name = "categoriaProdutoId", nullable = false, foreignKey = @ForeignKey(name = "fk_rel_CategoriaProduto")),
+            inverseJoinColumns =  @JoinColumn(name = "unidadeid", nullable = false, foreignKey = @ForeignKey(name = "fk_rel_Unidade_CategoriaProduto"))
     )
     private List<Unidade> unidade;
 
