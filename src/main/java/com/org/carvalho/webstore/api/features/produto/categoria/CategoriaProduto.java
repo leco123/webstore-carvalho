@@ -51,7 +51,7 @@ public class CategoriaProduto implements Serializable {
 
     @ApiModelProperty(name = "Unidade/Estabelecimento")
     @NotNull
-    @OneToMany
+    @OneToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "relUnidadeCategoriaProduto",
             joinColumns =  @JoinColumn(name = "categoriaProdutoId", nullable = false, foreignKey = @ForeignKey(name = "fk_rel_CategoriaProduto")),
             inverseJoinColumns =  @JoinColumn(name = "unidadeid", nullable = false, foreignKey = @ForeignKey(name = "fk_rel_Unidade_CategoriaProduto"))
