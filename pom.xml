@@ -74,6 +74,10 @@
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-flyway</artifactId>
     </dependency>
+    <dependency>
+      <groupId>io.quarkus</groupId>
+      <artifactId>quarkus-rest-client</artifactId>
+    </dependency>
     <!-- https://mvnrepository.com/artifact/io.swagger/swagger-annotations -->
     <dependency>
 	  <groupId>io.swagger</groupId>

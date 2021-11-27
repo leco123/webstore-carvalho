@@ -9,9 +9,7 @@ import java.util.List;
 @RequestScoped
 public class MoedaResource  extends CRUD<Moeda, Long> implements CrudBasic<Moeda> {
 
-    public MoedaResource() {
-        super(Moeda.class);
-    }
+    public MoedaResource() { super(Moeda.class); }
 
     @Override
     public Moeda adicionar(Moeda moeda) { return super.salvar(moeda); }

@@ -31,10 +31,6 @@ public  class  CRUD<T , PK extends Serializable>  {
 
 	public CRUD(Class<T> persistedClass) {
 		this.persistedClass = persistedClass;
-		System.out.println("LOG DE PERSISTENCIA: " +
-				"TIPO: CARREGANDO CONSTRUCTOR \n" +
-				"OPCIONAL: "+persistedClass.toString()+" \n"+
-				"DATA HORA: "+ LocalDateTime.now() +" \n\n ");
 	}
 
 	/**
@@ -48,6 +44,7 @@ public  class  CRUD<T , PK extends Serializable>  {
 					"TIPO: SALVANDO REGISTRO \n" +
 					"OPCIONAL: "+entidade.toString()+" \n"+
 					"DATA HORA: "+ LocalDateTime.now() +" \n\n ");
+
 			em.persist(entidade);
 			return entidade;
 		} catch (Exception e) {
